@@ -6,3 +6,9 @@ testdata/audit_out/
 testdata/fairface/
 *.sqlite
 .DS_Store
+
+# User-supplied test videos: never commit these (privacy). The two synthetic
+# test videos (club_a/b) are already tracked and stay.
+testdata/videos/*
+!testdata/videos/club_a.mp4
+!testdata/videos/club_b.mp4
