@@ -1,0 +1,18 @@
+# face-audit — fully offline face-censorship audit pipeline
+# Python 3.10+ recommended.
+
+opencv-python>=4.8.0
+numpy>=1.24.0
+insightface>=0.7.3
+onnxruntime>=1.16.0        # CPU build. For NVIDIA GPUs: uninstall this and
+                           # pip install onnxruntime-gpu instead (never both).
+pyyaml>=6.0
+typer>=0.9.0
+tqdm>=4.65.0
+
+# Optional: identity tracking across frames (dedupe exports per person).
+# supervision>=0.20.0
+
+# Optional: only needed for train_classifier.py (the v2 ML upgrade path).
+# torch>=2.0.0
+# torchvision>=0.15.0

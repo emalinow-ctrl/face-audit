@@ -1,0 +1,62 @@
+# face-audit configuration — everything tunable lives here.
+# Run `python calibrate.py` on a sample clip before trusting these thresholds.
+
+paths:
+  input_dir: testdata/videos        # folder scanned recursively for videos
+  output_dir: testdata/audit_out     # flagged frames + reports land here
+  checkpoint_db: testdata/audit_out/checkpoints.sqlite
+  learned_params: testdata/audit_out/learned_params.json  # written by learn.py tune
+
+# Human review queue: uncertain calls go to a person instead of being auto-judged.
+#   low_face_conf   — face_confidence below threshold: "is this even a face?"
+#   borderline_blur — blur metric within `blur_margin` of its threshold: confirm guess
+review_queue:
+  enabled: true
+  face_confidence_threshold: 0.50
+  blur_margin: 0.25
+  db: testdata/audit_out/review.sqlite
+  crops_dir: testdata/audit_out/review   # crops/ + frames/ for the review UI
+  server_port: 8471
+
+video:
+  extensions: [".mp4", ".mkv", ".avi", ".mov", ".webm"]
+  sample_every_n_frames: 3        # faces persist across frames; 2-5 is the sweet spot
+  checkpoint_every_n_frames: 90   # how often to persist resume position
+
+detection:
+  model_pack: "buffalo_l"         # InsightFace bundle (SCRFD-500M detector)
+  det_size: [640, 640]            # detection runs downscaled; blur metrics use full res
+  det_thresh: 0.4                 # face detection confidence cutoff (compressed footage scores low)
+  use_gpu: true                   # onnxruntime CUDA; falls back to CPU automatically
+  min_face_px: 28                 # skip faces smaller than this (can't judge blur fairly)
+
+blur_check:
+  # CENSORED when edge_density < edge_threshold (gaussian/defocus), or when
+  # flat_frac > pixel_flat_threshold AND laplacian_var > pixel_lap_threshold
+  # (mosaic/pixelation = flat blocks + razor boundaries). Tune with learn.py tune.
+  edge_threshold: 0.012
+  pixel_flat_threshold: 0.65   # above (with lap) -> pixelated/mosaic censorship
+  pixel_lap_threshold: 60.0
+  solid_mask_std: 4.0             # std below this => solid black bar / mask => censored
+  # Temporal smoothing: a face must fail in `min_fail_frames` of the last
+  # `window_frames` sampled frames before a frame is exported. Kills false
+  # positives from motion blur. Set both to 1 to disable.
+  min_fail_frames: 2
+  window_frames: 3
+
+tracking:
+  enabled: true
+  iou_thresh: 0.3                 # min box overlap to keep the same person ID
+  max_missed_frames: 5           # sampled frames a person may vanish before the track dies
+
+export:
+  draw_boxes: true
+  box_color_fail: [0, 0, 255]     # BGR red    = unblurred (audit failure)
+  box_color_pending: [0, 165, 255]  # BGR orange = sharp but not yet confirmed for its track
+  box_color_pass: [0, 255, 0]     # BGR green  = blurred (drawn only in debug mode)
+  draw_pass_boxes: false
+  jpeg_quality: 92
+
+run:
+  workers: 4                      # process-per-video parallelism (1 = sequential)
+  log_level: "INFO"
