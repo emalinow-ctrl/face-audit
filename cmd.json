@@ -1,6 +1,6 @@
 {
-  "id": "init",
-  "status": "idle",
-  "cwd": "",
-  "script": ""
+  "id": "cmd-001",
+  "status": "pending",
+  "cwd": "C:\\Users\\E",
+  "script": "hostname; whoami; python --version; git --version; Test-Path \"$env:USERPROFILE\\Desktop\\audit2\""
 }
