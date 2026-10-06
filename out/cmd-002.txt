@@ -1,0 +1,16 @@
+=== git ===
+5f65aa7 face-audit pipeline: SCRFD detection, blur/edge/flat metrics, tracking, review queue, learning loop
+=== venv ===
+venv exists
+=== deps ===
+deps ok
+=== models ===
+True
+=== metric check ===
+
+tests\test_config.yaml:35:  # flat_frac > pixel_flat_threshold AND laplacian_var > 
+pixel_lap_threshold
+tests\test_config.yaml:38:  pixel_flat_threshold: 0.65   # above (with lap) -> pixelated/mosaic 
+censorship
+
+
