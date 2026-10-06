@@ -47,6 +47,12 @@ if (!(Test-Path (Join-Path $RelayDir ".git"))) {
 # The clone URL already carries the token; the Windows credential manager only
 # adds noise ("Unable to persist credentials") — disable it for this clone.
 Git @("config", "credential.helper", "") | Out-Null
+# Commits need an author identity; a fresh git install has none. Repo-local so
+# we don't touch the user's global git identity.
+Git @("config", "user.name", "faceaudit-relay") | Out-Null
+Git @("config", "user.email", "relay@local") | Out-Null
+# Unstage leftovers from a crashed run (a dirty index blocks pull --rebase).
+Git @("reset", "-q") | Out-Null
 
 Log "relay poller started (branch=$Branch, interval=${IntervalSec}s)"
 while ($true) {
