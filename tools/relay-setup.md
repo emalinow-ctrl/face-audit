@@ -38,7 +38,8 @@ Remove with: `Unregister-ScheduledTask -TaskName "FaceAuditRelay" -Confirm:$fals
 
 ## Protocol (for Muse)
 
-- Issue: write `cmd.json` = `{"id":"cmd-004","status":"pending","cwd":"...","script":"..."}`, commit, push `relay`.
-- Wait: fetch/pull until `status` is `done`, then read `out/<id>.txt`, `out/<id>.err.txt`, `out/<id>.meta.json`.
+- Issue: write `cmd.json` = `{"id":"cmd-004","status":"pending","cwd":"...","script":"..."}`, commit **only** `cmd.json`, pull --rebase, push `relay`.
+- Wait: fetch until `out/<id>.meta.json` exists, then read `out/<id>.txt`, `out/<id>.err.txt`, `out/<id>.meta.json`.
+- Never write to `out/` (the poller owns it); the poller never writes `cmd.json` (you own it). This is what keeps pushes conflict-free.
 - Stop the poller: issue `{"id":"halt","status":"pending","script":"","cwd":""}`.
 - Keep scripts self-contained; prefer absolute paths; don't assume admin.

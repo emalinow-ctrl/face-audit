@@ -3,16 +3,16 @@
 # Lets Muse drive this PC (run the pipeline, read logs, diagnose) without an
 # interactive session. No admin needed; runs as the current user.
 #
-#   How it works: every $IntervalSec seconds it pulls the `relay` branch.
-#   When cmd.json appears with status "pending", it runs the embedded PowerShell
-#   script, captures stdout/stderr + exit code into out/, marks it done, pushes.
+#   Sync protocol (conflict-free by construction):
+#     - Muse is the ONLY writer of cmd.json. The poller takes it verbatim from
+#       the remote every loop (no merges, no local commits of it).
+#     - The poller is the ONLY writer of out/. It commits just out/ and
+#       rebases before pushing, so simultaneous pushes never conflict.
 #
-#   Start it once (survives SSH disconnect as long as this Windows session lives):
+#   Start it once (survives SSH disconnect while this Windows session lives):
 #     powershell -NoProfile -ExecutionPolicy Bypass -File tools\relay-poller.ps1
-#   Stop it: Ctrl+C in its window, or kill the powershell process.
+#   Stop it: Ctrl+C in its window, kill the process, or issue {"id":"halt"}.
 #   Revoke it: revoke the GitHub token and/or delete the `relay` branch.
-#
-#   A command {"id":"halt","status":"pending"} stops the poller cleanly.
 
 param(
   [string]$RelayDir = "$env:USERPROFILE\relay",
@@ -29,6 +29,14 @@ function Log($m) {
   Write-Host $line
 }
 
+function Git($gArgs) {
+  $p = Start-Process git.exe -ArgumentList $gArgs -WorkingDirectory $RelayDir `
+       -NoNewWindow -Wait -PassThru `
+       -RedirectStandardOutput "$RelayDir\git.out.log" `
+       -RedirectStandardError "$RelayDir\git.err.log"
+  return $p.ExitCode
+}
+
 if (!(Test-Path (Join-Path $RelayDir ".git"))) {
   Log "ERROR: $RelayDir is not a git clone. See tools/relay-setup.md first."
   exit 1
@@ -37,29 +45,21 @@ if (!(Test-Path (Join-Path $RelayDir ".git"))) {
 Log "relay poller started (branch=$Branch, interval=${IntervalSec}s)"
 while ($true) {
   try {
-    git -C $RelayDir fetch -q origin $Branch 2>$null
-    git -C $RelayDir checkout -q $Branch 2>$null
-    git -C $RelayDir pull -q --ff-only origin $Branch 2>$null
+    if ((Git @("fetch", "-q", "origin", $Branch)) -ne 0) {
+      Log "fetch failed, retrying next loop"; Start-Sleep -Seconds $IntervalSec; continue
+    }
+    # Take Muse's cmd.json verbatim — never merge it.
+    Git @("checkout", "-q", "origin/$Branch", "--", "cmd.json") | Out-Null
+    Git @("reset", "-q") | Out-Null  # keep it out of the index; we never commit it
 
     $cmdPath = Join-Path $RelayDir "cmd.json"
     if (Test-Path $cmdPath) {
       $cmd = Get-Content $cmdPath -Raw | ConvertFrom-Json
       if ($cmd.id -eq "halt" -and $cmd.status -eq "pending") {
-        Log "halt received, stopping."
-        $cmd.status = "done" | Out-Null
-        @{id = "halt"; status = "done"; script = ""; cwd = ""} |
-          ConvertTo-Json | Set-Content $cmdPath
-        git -C $RelayDir commit -qam "halt" 2>$null
-        git -C $RelayDir push -q origin $Branch 2>$null
-        break
+        Log "halt received, stopping."; break
       }
-      if ($cmd.id -ne $lastId -and $cmd.status -eq "pending") {
+      if ($cmd.id -and $cmd.id -ne $lastId -and $cmd.status -eq "pending") {
         Log "executing $($cmd.id)"
-        @{id = $cmd.id; status = "running"; script = $cmd.script; cwd = $cmd.cwd} |
-          ConvertTo-Json -Depth 5 | Set-Content $cmdPath
-        git -C $RelayDir commit -qam "running $($cmd.id)" 2>$null
-        git -C $RelayDir push -q origin $Branch 2>$null
-
         $scriptFile = Join-Path $RelayDir "run.ps1"
         Set-Content -Path $scriptFile -Value $cmd.script -Encoding utf8
         $outDir = Join-Path $RelayDir "out"
@@ -77,13 +77,16 @@ while ($true) {
           finished_utc = (Get-Date).ToUniversalTime().ToString("o")} |
           ConvertTo-Json | Set-Content (Join-Path $outDir "$($cmd.id).meta.json")
 
-        @{id = $cmd.id; status = "done"; script = $cmd.script; cwd = $cmd.cwd} |
-          ConvertTo-Json -Depth 5 | Set-Content $cmdPath
-        git -C $RelayDir add -A 2>$null
-        git -C $RelayDir commit -qm "done $($cmd.id) exit $($p.ExitCode)" 2>$null
-        git -C $RelayDir push -q origin $Branch 2>$null
-        Log "done $($cmd.id) (exit $($p.ExitCode))"
-        $lastId = $cmd.id
+        # Commit ONLY out/ — never cmd.json (Muse owns that file).
+        Git @("add", "--", "out/") | Out-Null
+        Git @("commit", "-qm", "done $($cmd.id) exit $($p.ExitCode)", "--", "out/") | Out-Null
+        Git @("pull", "-q", "--rebase", "origin", $Branch) | Out-Null
+        if ((Git @("push", "-q", "origin", $Branch)) -ne 0) {
+          Log "push failed for $($cmd.id); will retry next loop"
+        } else {
+          Log "done $($cmd.id) (exit $($p.ExitCode))"
+          $lastId = $cmd.id
+        }
       }
     }
   } catch {
