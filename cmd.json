@@ -1,6 +1,6 @@
 {
-  "id": "cmd-002",
+  "id": "cmd-003",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "cd \"$env:USERPROFILE\\Desktop\\audit2\"\n\"=== git ===\"\ngit log --oneline -1\n\"=== venv ===\"\nif (!(Test-Path .venv)) { \"creating venv...\"; py -m venv .venv } else { \"venv exists\" }\n\"=== deps ===\"\n& .\\.venv\\Scripts\\Activate.ps1\npip install -q -r requirements.txt 2>&1 | Select-Object -Last 2\npython -c \"import insightface, onnxruntime, cv2; print('deps ok')\"\n\"=== models ===\"\nTest-Path \"$env:USERPROFILE\\.insightface\\models\\buffalo_l\"\n\"=== metric check ===\"\nSelect-String -Path tests/test_config.yaml -Pattern \"pixel_flat_threshold\"\n"
+  "script": "cd \"$env:USERPROFILE\\Desktop\\audit2\"\n& .\\.venv\\Scripts\\Activate.ps1\n\"=== pipeline start ===\"\npython main.py --config tests/test_config.yaml --workers 4 --reset 2>&1 | Select-Object -Last 15\n\"=== evaluate ===\"\npython tests/evaluate.py --gt testdata/ground_truth --out testdata/audit_out --review-db testdata/audit_out/review.sqlite\n"
 }
