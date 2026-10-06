@@ -48,6 +48,7 @@ while ($true) {
     if ((Git @("fetch", "-q", "origin", $Branch)) -ne 0) {
       Log "fetch failed, retrying next loop"; Start-Sleep -Seconds $IntervalSec; continue
     }
+    Git @("push", "-q", "origin", $Branch) | Out-Null  # flush any stranded result commits
     # Take Muse's cmd.json verbatim — never merge it.
     Git @("checkout", "-q", "origin/$Branch", "--", "cmd.json") | Out-Null
     Git @("reset", "-q") | Out-Null  # keep it out of the index; we never commit it
@@ -78,14 +79,16 @@ while ($true) {
           ConvertTo-Json | Set-Content (Join-Path $outDir "$($cmd.id).meta.json")
 
         # Commit ONLY out/ — never cmd.json (Muse owns that file).
+        # Mark done BEFORE pushing: a failed push retries next loop via the
+        # flush above, and must not re-execute the command.
+        $lastId = $cmd.id
         Git @("add", "--", "out/") | Out-Null
         Git @("commit", "-qm", "done $($cmd.id) exit $($p.ExitCode)", "--", "out/") | Out-Null
         Git @("pull", "-q", "--rebase", "origin", $Branch) | Out-Null
         if ((Git @("push", "-q", "origin", $Branch)) -ne 0) {
-          Log "push failed for $($cmd.id); will retry next loop"
+          Log "push failed for $($cmd.id); result commit stranded, will retry"
         } else {
           Log "done $($cmd.id) (exit $($p.ExitCode))"
-          $lastId = $cmd.id
         }
       }
     }

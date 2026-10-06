@@ -19,12 +19,15 @@ git clone --branch relay "https://x-access-token:${pat}@github.com/emalinow-ctrl
 
 ## 2. Start the poller (detached, survives SSH disconnect)
 
+The relay branch carries its own copy of the poller, so the relay clone is
+self-contained:
+
 ```powershell
-Start-Process powershell.exe -ArgumentList "-NoProfile","-ExecutionPolicy","Bypass","-File","$env:USERPROFILE\Desktop\audit2\tools\relay-poller.ps1" -WorkingDirectory "$env:USERPROFILE\relay"
+Start-Process powershell.exe -ArgumentList "-NoProfile","-ExecutionPolicy","Bypass","-File","$env:USERPROFILE\relay\tools\relay-poller.ps1" -WorkingDirectory "$env:USERPROFILE\relay"
 ```
 
-(Assumes the main clone lives at `Desktop\audit2`; the poller defaults there for
-command working directory. Override per-command with the `cwd` field.)
+(The poller defaults to running commands in `Desktop\audit2` — override
+per-command with the `cwd` field.)
 
 ## 3. Optional: start automatically at logon (no admin needed)
 
