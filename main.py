@@ -15,6 +15,7 @@ import sys
 import warnings
 from collections import deque
 from concurrent.futures import ProcessPoolExecutor, as_completed
+from datetime import datetime, timezone
 from pathlib import Path
 
 # insightface internals raise a deprecation FutureWarning on import; not ours to fix.
@@ -102,6 +103,21 @@ def iter_videos(input_dir: Path, extensions: list[str]) -> list[Path]:
     return sorted(p for p in input_dir.rglob("*") if p.suffix.lower() in exts)
 
 
+def _write_status(output_dir: str, video_stem: str, payload: dict) -> None:
+    """Publish a tiny live-status JSON for the dashboard.
+
+    Called once per checkpoint (~every 90 frames) plus once at completion.
+    Best-effort: status is advisory and must never break the pipeline.
+    """
+    try:
+        sdir = Path(output_dir) / "status"
+        sdir.mkdir(parents=True, exist_ok=True)
+        payload["updated_at"] = datetime.now(timezone.utc).isoformat()
+        (sdir / f"{video_stem}.json").write_text(json.dumps(payload))
+    except OSError:
+        pass
+
+
 def _process_video(video: str, cfg: dict, db_path: str, output_dir: str) -> dict:
     """Process one video end-to-end. Must be top-level for pickling."""
     db = CheckpointDB(db_path)
@@ -150,6 +166,7 @@ def _process_video(video: str, cfg: dict, db_path: str, output_dir: str) -> dict
     stats = {"frames_read": 0, "frames_sampled": 0, "faces_seen": 0,
              "faces_failed": 0, "faces_skipped_small": 0, "tracks_total": 0,
              "review_queued": 0}
+    recent_conf: deque[float] = deque(maxlen=12)  # rolling face-confidence window
     video_stem = Path(video).stem
     idx = start
     try:
@@ -162,6 +179,7 @@ def _process_video(video: str, cfg: dict, db_path: str, output_dir: str) -> dict
                 assessed = []  # [(entry, sharp, borderline, det, metrics)]
                 for f in detector.detect(frame):
                     fc = f["face_confidence"]
+                    recent_conf.append(round(fc, 3))
                     x1, y1, x2, y2 = expand_bbox(f["bbox"], h, w)
                     if min(x2 - x1, y2 - y1) < det_cfg["min_face_px"]:
                         stats["faces_skipped_small"] += 1
@@ -246,10 +264,22 @@ def _process_video(video: str, cfg: dict, db_path: str, output_dir: str) -> dict
             stats["frames_read"] += 1
             if idx % ckpt_n == 0:
                 db.checkpoint(video, idx)
+                _write_status(output_dir, video_stem, {
+                    "video": Path(video).name, "frame": idx,
+                    "total_frames": total, "fps": round(fps, 2),
+                    "status": "processing", "stats": dict(stats),
+                    "recent_confidence": list(recent_conf),
+                })
             idx += 1
     finally:
         cap.release()
     db.mark_done(video, idx)
+    _write_status(output_dir, video_stem, {
+        "video": Path(video).name, "frame": idx,
+        "total_frames": total, "fps": round(fps, 2),
+        "status": "done", "stats": dict(stats),
+        "recent_confidence": list(recent_conf),
+    })
     if use_tracking:
         stats["tracks_total"] = tracker.count
         tracks_path = Path(output_dir) / f"{video_stem}_tracks.json"
