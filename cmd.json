@@ -1,6 +1,6 @@
 {
-  "id": "cmd-022",
+  "id": "cmd-023",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "$env:Path = [System.Environment]::GetEnvironmentVariable(\"Path\",\"Machine\") + \";\" + [System.Environment]::GetEnvironmentVariable(\"Path\",\"User\")\n$configDir = \"$env:USERPROFILE\\.config\\opencode\"\nNew-Item -ItemType Directory -Force $configDir | Out-Null\n$config = @{ model = \"opencode/space-bunny-free\" } | ConvertTo-Json\n$config | Out-File -FilePath \"$configDir\\opencode.json\" -Encoding utf8\n\"config written: $config\"\n\"=== testing ===\"\ncd \"$env:USERPROFILE\\Desktop\\audit2\"\n\"hello\" | opencode run \"Reply with exactly: SPACEBUNNY_OK\" 2>&1 | Select-Object -First 10\n"
+  "script": "$env:Path = [System.Environment]::GetEnvironmentVariable(\"Path\",\"Machine\") + \";\" + [System.Environment]::GetEnvironmentVariable(\"Path\",\"User\")\ncd \"$env:USERPROFILE\\Desktop\\audit2\"\n\"=== trying with timeout ===\"\n$job = Start-Job -ScriptBlock {\n  $env:Path = [System.Environment]::GetEnvironmentVariable(\"Path\",\"Machine\") + \";\" + [System.Environment]::GetEnvironmentVariable(\"Path\",\"User\")\n  Set-Location \"$env:USERPROFILE\\Desktop\\audit2\"\n  \"test\" | opencode run \"Say hi\" 2>&1\n}\nif (Wait-Job $job -Timeout 30) {\n  Receive-Job $job\n} else {\n  \"TIMED OUT after 30s\"\n  Stop-Job $job\n}\nRemove-Job $job -Force\n"
 }
