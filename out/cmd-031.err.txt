@@ -1,0 +1,23 @@
+node.exe : npm verbose cli C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\npm\bin\npm-cli.js
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (npm verbose cli...\bin\npm-cli.js:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+npm info using npm@11.17.0
+npm info using node@v24.19.0
+npm verbose title npm install opencode-vibeguard
+npm verbose argv "install" "opencode-vibeguard" "--loglevel" "verbose"
+npm verbose logfile logs-max:10 dir:C:\Users\E\AppData\Local\npm-cache\_logs\2026-10-07T04_30_04_336Z-
+npm verbose logfile C:\Users\E\AppData\Local\npm-cache\_logs\2026-10-07T04_30_04_336Z-debug-0.log
+npm http fetch GET 200 https://registry.npmjs.org/opencode-vibeguard 273ms (cache revalidated)
+npm http cache opencode-vibeguard@https://registry.npmjs.org/opencode-vibeguard/-/opencode-vibeguard-0.1.0.tgz 0ms 
+(cache hit)
+npm http fetch POST 200 https://registry.npmjs.org/-/npm/v1/security/advisories/bulk 56ms
+npm verbose cwd C:\Users\E\.config\opencode
+npm verbose os Windows_NT 10.0.26200
+npm verbose node v24.19.0
+npm verbose npm  v11.17.0
+npm verbose exit 0
+npm info ok
