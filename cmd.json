@@ -1,6 +1,6 @@
 {
-  "id": "cmd-090",
+  "id": "cmd-091",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "\"=== model section ===\"\nSelect-String -Path \"C:\\Users\\E\\AppData\\Local\\hermes\\config.yaml\" -Pattern '^model:' | Select-Object LineNumber\n$line = (Select-String -Path \"C:\\Users\\E\\AppData\\Local\\hermes\\config.yaml\" -Pattern '^model:').LineNumber\n(Get-Content \"C:\\Users\\E\\AppData\\Local\\hermes\\config.yaml\")[$line..($line+5)] -join \"`n\"\n"
+  "script": "\"=== provider and base_url ===\"\nSelect-String -Path \"C:\\Users\\E\\AppData\\Local\\hermes\\config.yaml\" -Pattern 'provider: \"custom\"|base_url: \"https://opencode' | Select-Object LineNumber, Line\n\"=== checking for bad chars around position 102091 ===\"\n$text = Get-Content \"C:\\Users\\E\\AppData\\Local\\hermes\\config.yaml\" -Raw\n\"Total length: $($text.Length)\"\nif ($text.Length -gt 102091) {\n  $snippet = $text.Substring(102080, 30)\n  \"Snippet: \" + [BitConverter]::ToString([Text.Encoding]::UTF8.GetBytes($snippet))\n}\n"
 }
