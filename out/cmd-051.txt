@@ -1,0 +1,81 @@
+=== status_server.py structure ===
+#!/usr/bin/env python3
+"""Live pipeline dashboard ƒ?" stdlib only, near-zero overhead.
+
+    python status_server.py --config tests/test_config.yaml --host 100.107.85.14 --port 8472
+
+Tabs:
+  Live ƒ?" progress bars, current task, rolling face-confidence, latest frame.
+  Flagged Frames ƒ?" gallery of all flagged frames from report.csv with a
+    Tinder-style accept/deny reviewer. Verdicts are stored in
+    <output_dir>/verdicts.json and can feed the learning loop later.
+
+Data comes from <output_dir>/status/*.json (written by main.py at each
+checkpoint), falling back to the checkpoint SQLite DB. The server only reads
+small files on each poll; it does no video decoding.
+
+Bind --host to the machine's Tailscale IP so the dashboard is reachable over
+the tailnet but not the LAN. Windows Firewall may need an inbound rule for
+the port (run once, elevated PowerShell):
+  New-NetFirewallRule -DisplayName "face-audit dashboard" -Direction Inbound `
+    -LocalPort 8472 -Protocol TCP -Action Allow
+"""
+from __future__ import annotations
+
+import csv
+import json
+import mimetypes
+import sqlite3
+import sys
+from datetime import datetime, timezone
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
+from urllib.parse import parse_qs, urlparse
+
+import typer
+import yaml
+
+app = typer.Typer(add_completion=False)
+
+HTML = """<!DOCTYPE html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>face-audit</title>
+<style>
+body{background:#101014;color:#e8e8e8;font-family:system-ui,sans-serif;margin:0;padding:20px}
+#wrap{max-width:1000px;margin:0 auto}
+h2{margin:0 0 4px} .sub{color:#888;font-size:13px;margin-bottom:18px}
+.hidden{display:none!important}
+/* tabs */
+#tabs{display:flex;gap:8px;margin:14px 0 18px}
+.tab{background:#1c1c22;color:#aaa;border:1px solid #2c2c34;border-radius:10px;
+  padding:10px 18px;font-size:14px;cursor:pointer}
+.tab.active{background:#2a1545;color:#e8d5ff;border-color:#7a2bd8}
+.tab .n{background:#7a2bd8;color:#fff;border-radius:10px;padding:1px 8px;font-size:12px;margin-left:6px}
+/* live tab */
+.bar{height:22px;background:#222;border-radius:11px;overflow:hidden;margin:6px 0 2px}
+.bar>i{display:block;height:100%;background:linear-gradient(90deg,#7a2bd8,#b04dff);
+  border-radius:11px;transition:width .8s}
+.bar.big{height:30px;border-radius:15px}.bar.big>i{border-radius:15px}
+.card{background:#18181e;border:1px solid #2c2c34;border-radius:10px;padding:14px 16px;margin:12px 0}
+.card.active{border-color:#7a2bd8}
+.row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.name{font-weight:600}.meta{font-size:12px;color:#999}
+.conf{font-size:13px;font-weight:700}
+.conf.good{color:#7ddf8a}.conf.mid{color:#ffcf7a}.conf.low{color:#ff8a8a}
+.pill{display:inline-block;padding:2px 10px;border-radius:10px;font-size:11px;margin-left:8px}
+.pill.run{background:#2a1545;color:#d9a7ff}.pill.done{background:#123f1a;color:#7ddf8a}
+.pill.idle{background:#2a2a2a;color:#999}
+#frame{max-width:100%;border:1px solid #333;border-radius:8px;margin-top:8px}
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:12px 0}
+.kv>div{background:#18181e;border:1px solid #2c2c34;border-radius:10px;padding:10px 14px}
+.kv .v{font-size:22px;font-weight:700}.kv .k{font-size:11px;color:#888}
+#err{color:#ff8a8a;font-size:13px}
+/* flagged tab */
+#gallery{margin-top:12px}
+.video-section{margin-bottom:24px}
+.video-header{font-size:15px;font-weight:600;margin-bottom:10px;padding-bottom:6px;
+  border-bottom:1px solid #2c2c34;cursor:pointer;user-select:none}
+.video-header .arrow{display:inline-block;width:20px;color:#7a2bd8}
+.video-grid.collapsed{display:none}
+.video-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+.thumb{position:relative;cursor:pointer;border-radius:8px;overflow:hidden;border:2px solid #2c2c34}
