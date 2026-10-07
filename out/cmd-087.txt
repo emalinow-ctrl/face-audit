@@ -1,0 +1,15 @@
+=== updating config.yaml ===
+Config updated
+=== setting API key in .env ===
+API key set in .env
+=== cleaning up temp token ===
+Done
+=== verifying config ===
+
+Line                                                                                  
+----                                                                                  
+# null to disable the adjustment. Default: 4096.                                      
+  # Deadline for each Git clone, fetch or checkout during plugin install. Default: 300
+  default: "space-bunny-free"                                                         
+
+
