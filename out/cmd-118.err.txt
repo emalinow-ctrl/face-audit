@@ -1,0 +1,9 @@
+Invoke-WebRequest : The process cannot access the file 
+'C:\Users\E\Desktop\docs\test_footage\genz_wf.mp4' because it is being used by another process.
+At C:\Users\E\relay\run.ps1:7 char:1
++ Invoke-WebRequest -Uri "https://muse.ai/files/1400680406453458/185939 ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [Invoke-WebRequest], IOException
+    + FullyQualifiedErrorId : System.IO.IOException,Microsoft.PowerShell.Commands.InvokeWebReques 
+   tCommand
+ 

@@ -1,0 +1,12 @@
+=== downloading genz_bm.mp4 (12MB) ===
+Done: 11.8976039886475 MB
+=== downloading genz_wf.mp4 (12MB) ===
+Done: 8.6015625 MB
+=== verifying ===
+
+Name        SizeMB
+----        ------
+genz_bm.mp4   11.9
+genz_wf.mp4    8.6
+
+
