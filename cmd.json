@@ -1,6 +1,6 @@
 {
-  "id": "cmd-089",
+  "id": "cmd-090",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "$env:Path += \";C:\\Users\\E\\AppData\\Local\\hermes\\bin\"\nhermes doctor 2>&1 | Select-Object -Skip 20 | Select-Object -First 30\n"
+  "script": "\"=== model section ===\"\nSelect-String -Path \"C:\\Users\\E\\AppData\\Local\\hermes\\config.yaml\" -Pattern '^model:' | Select-Object LineNumber\n$line = (Select-String -Path \"C:\\Users\\E\\AppData\\Local\\hermes\\config.yaml\" -Pattern '^model:').LineNumber\n(Get-Content \"C:\\Users\\E\\AppData\\Local\\hermes\\config.yaml\")[$line..($line+5)] -join \"`n\"\n"
 }
