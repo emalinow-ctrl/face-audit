@@ -1,9 +1,9 @@
 === tabs in HTML ===
 
-Line                                                                                              
-----                                                                                              
-<div id="tabs">                                                                                   
-  <button class="tab" id="tab-flagged" onclick="showTab('flagged')">Flagged Frames<span class="...
+Line                                                                                                                   
+----                                                                                                                   
+<div id="tabs">                                                                                                        
+  <button class="tab" id="tab-flagged" onclick="showTab('flagged')">Flagged Frames<span class="n" id="flag-n">0</spa...
 === do_GET routes ===
         parsed = urlparse(self.path)
         path = parsed.path
