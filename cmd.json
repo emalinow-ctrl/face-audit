@@ -1,6 +1,6 @@
 {
-  "id": "cmd-072",
+  "id": "cmd-073",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "\"=== main.py size and structure ===\"\n$lines = (Get-Content \"C:\\Users\\E\\Desktop\\audit2\\main.py\").Count\n\"Lines: $lines\"\n\"=== functions ===\"\nSelect-String -Path \"C:\\Users\\E\\Desktop\\audit2\\main.py\" -Pattern \"^def |^class \" | Select-Object Line | Select-Object -First 15\n\"=== threshold usage ===\"\nSelect-String -Path \"C:\\Users\\E\\Desktop\\audit2\\main.py\" -Pattern \"det_thresh|face_confidence|edge_threshold|pixel_flat|pixel_lap\" | Select-Object LineNumber, Line | Select-Object -First 10\n"
+  "script": "\"=== _is_borderline ===\"\n$start = (Select-String -Path \"C:\\Users\\E\\Desktop\\audit2\\main.py\" -Pattern \"def _is_borderline\").LineNumber\n(Get-Content \"C:\\Users\\E\\Desktop\\audit2\\main.py\")[$start..($start+20)] -join \"`n\"\n"
 }
