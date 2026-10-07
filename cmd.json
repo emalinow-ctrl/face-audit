@@ -1,6 +1,6 @@
 {
-  "id": "cmd-087",
+  "id": "cmd-088",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "$hermesDir = \"C:\\Users\\E\\AppData\\Local\\hermes\"\n$token = Get-Content \"$env:TEMP\\zen_token.txt\" -Raw\n\n\"=== updating config.yaml ===\"\n$configPath = \"$hermesDir\\config.yaml\"\n$text = Get-Content $configPath -Raw\n\n# Replace model section\n$text = $text -replace 'default: \"stealth/space-bunny-alpha\"', 'default: \"space-bunny-free\"'\n$text = $text -replace 'provider: \"nous\"', 'provider: \"custom\"'\n$text = $text -replace 'base_url: \"https://inference-api.nousresearch.com/v1\"', 'base_url: \"https://opencode.ai/zen/v1\"'\n\n$text | Out-File -FilePath $configPath -Encoding utf8\n\"Config updated\"\n\n\"=== setting API key in .env ===\"\n$envPath = \"$hermesDir\\.env\"\n$envContent = \"\"\nif (Test-Path $envPath) { $envContent = Get-Content $envPath -Raw }\n# Remove old OPENAI_API_KEY if present, add new one\n$envContent = ($envContent -split \"`n\" | Where-Object { $_ -notmatch \"^OPENAI_API_KEY=\" }) -join \"`n\"\n$envContent += \"`nOPENAI_API_KEY=$token`n\"\n$envContent | Out-File -FilePath $envPath -Encoding utf8\n\"API key set in .env\"\n\n\"=== cleaning up temp token ===\"\nRemove-Item \"$env:TEMP\\zen_token.txt\" -Force\n\"Done\"\n\n\"=== verifying config ===\"\nSelect-String -Path $configPath -Pattern 'default:|provider:|base_url:' | Select-Object Line | Select-Object -First 3\n"
+  "script": "$env:Path += \";C:\\Users\\E\\AppData\\Local\\hermes\\bin\"\n\"=== hermes doctor ===\"\nhermes doctor 2>&1 | Select-Object -First 30\n"
 }
