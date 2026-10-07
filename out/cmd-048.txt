@@ -1,0 +1,6 @@
+=== auth.json (redacted) ===
+opencode
+=== check if token looks valid ===
+Zen auth type: api
+=== trying with explicit model flag ===
+TIMED OUT
