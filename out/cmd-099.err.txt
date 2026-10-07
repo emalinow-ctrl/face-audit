@@ -2,7 +2,8 @@ hermes : hermes: 'Reply with exactly: HERMES_OK' is not a `hermes` command.
 At line:3 char:3
 +   hermes -p "Reply with exactly: HERMES_OK" 2>&1 | Select-Object -Fir ...
 +   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : NotSpecified: (hermes: 'Reply ...ermes` command.:String) [], RemoteException
+    + CategoryInfo          : NotSpecified: (hermes: 'Reply ...ermes` command.:String) [], Remote 
+   Exception
     + FullyQualifiedErrorId : NativeCommandError
  
 Run `hermes --help` to see all commands.
