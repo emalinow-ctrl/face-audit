@@ -1,0 +1,3 @@
+=== extracting Zen token ===
+Token found, length: 51
+Token saved to temp file
