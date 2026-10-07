@@ -1,0 +1,13 @@
+RustDesk.exe : [ERROR:flutter/shell/platform/windows/direct_manipulation.cc(201)] 
+manager_->Activate(window_->GetWindowHandle()) failed
+At C:\Users\E\relay\run.ps1:4 char:3
++   & $exe --set-password "FaceAudit2026!" 2>&1 | Select-Object -First  ...
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([ERROR:flutter/...andle()) failed:String) [], Remote 
+   Exception
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+ERR: SwapChain11.cpp:636 (reset): Could not create additional swap chains or offscreen surfaces, 
+HRESULT: 0x887A0022
+ERR: SwapChain11.cpp:636 (reset): Could not create additional swap chains or offscreen surfaces, 
+HRESULT: 0x887A0022

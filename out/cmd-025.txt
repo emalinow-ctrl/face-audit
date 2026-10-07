@@ -1,0 +1,2 @@
+=== setting permanent password ===
+password set
