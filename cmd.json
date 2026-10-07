@@ -1,6 +1,6 @@
 {
-  "id": "cmd-020",
+  "id": "cmd-021",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "$env:Path = [System.Environment]::GetEnvironmentVariable(\"Path\",\"Machine\") + \";\" + [System.Environment]::GetEnvironmentVariable(\"Path\",\"User\")\n\"=== service.json ===\"\nGet-Content \"$env:USERPROFILE\\.config\\opencode\\service.json\" -ErrorAction SilentlyContinue\n\"=== opencode help ===\"\nopencode --help 2>&1 | Select-Object -First 30\n"
+  "script": "$env:Path = [System.Environment]::GetEnvironmentVariable(\"Path\",\"Machine\") + \";\" + [System.Environment]::GetEnvironmentVariable(\"Path\",\"User\")\ncd \"$env:USERPROFILE\\Desktop\\audit2\"\n\"=== auth login (what does it ask for?) ===\"\necho \"n\" | opencode auth login 2>&1 | Select-Object -First 20\n\"=== config file ===\"\nGet-Content \"$env:USERPROFILE\\.config\\opencode\\opencode.json\" -ErrorAction SilentlyContinue || echo \"no opencode.json\"\n"
 }
