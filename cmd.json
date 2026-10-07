@@ -1,6 +1,6 @@
 {
-  "id": "cmd-064",
+  "id": "cmd-065",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "\"=== tab content divs ===\"\nSelect-String -Path \"C:\\Users\\E\\Desktop\\audit2\\status_server.py\" -Pattern 'id=\"content-' | Select-Object LineNumber, Line | Select-Object -First 5\n"
+  "script": "\"=== showTab function ===\"\nSelect-String -Path \"C:\\Users\\E\\Desktop\\audit2\\status_server.py\" -Pattern \"function showTab\" | Select-Object LineNumber\nGet-Content \"C:\\Users\\E\\Desktop\\audit2\\status_server.py\" | Select-String -Pattern \"function showTab\" -Context 0,15 | Select-Object -First 20\n"
 }
