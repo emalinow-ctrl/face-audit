@@ -1,0 +1,9 @@
+Exception calling "Substring" with "2" argument(s): "Index and length must refer to a location 
+within the string.
+Parameter name: length"
+At C:\Users\E\relay\run.ps1:3 char:113
++ ... $_ -match "^(ZEN|OPENAI)_API_KEY=") { $_.Substring(0, 20) + "..." } }
++                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [], MethodInvocationException
+    + FullyQualifiedErrorId : ArgumentOutOfRangeException
+ 
