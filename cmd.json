@@ -1,6 +1,6 @@
 {
-  "id": "cmd-117",
+  "id": "cmd-118",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "\"=== looking for FairFace data ===\"\nGet-ChildItem \"C:\\Users\\E\\Desktop\\audit2\" -Recurse -Filter \"*fairface*\" 2>$null | Select-Object FullName | Select-Object -First 5\nGet-ChildItem \"C:\\Users\\E\\Desktop\\audit2\\testdata\" -Recurse 2>$null | Select-Object Name | Select-Object -First 10\n\"=== original generation script ===\"\nGet-ChildItem \"C:\\Users\\E\\Desktop\\audit2\" -Filter \"*.py\" | Where-Object { $_.Name -match \"generat|synth|footage\" } | Select-Object Name\n\"=== check tools dir ===\"\nGet-ChildItem \"C:\\Users\\E\\Desktop\\audit2\\tools\" 2>$null | Select-Object Name | Select-Object -First 10\n"
+  "script": "$outDir = \"C:\\Users\\E\\Desktop\\docs\\test_footage\"\nNew-Item -ItemType Directory -Force $outDir | Out-Null\n\"=== downloading genz_bm.mp4 (12MB) ===\"\nInvoke-WebRequest -Uri \"https://muse.ai/files/1400680406453458/2329266224144606/xco0ehstfphe4x04dwqcauox/genz_bm.mp4\" -OutFile \"$outDir\\genz_bm.mp4\" -UseBasicParsing\n\"Done: $((Get-Item \"$outDir\\genz_bm.mp4\").Length / 1MB) MB\"\n\"=== downloading genz_wf.mp4 (12MB) ===\"\nInvoke-WebRequest -Uri \"https://muse.ai/files/1400680406453458/1859392061888807/izv8n4qtnt01xsz5wslom05d/genz_wf.mp4\" -OutFile \"$outDir\\genz_wf.mp4\" -UseBasicParsing\n\"Done: $((Get-Item \"$outDir\\genz_wf.mp4\").Length / 1MB) MB\"\n\"=== verifying ===\"\nGet-ChildItem $outDir | Select-Object Name, @{N=\"SizeMB\";E={[math]::Round($_.Length/1MB,1)}}\n"
 }
