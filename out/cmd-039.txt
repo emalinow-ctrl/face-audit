@@ -1,0 +1,22 @@
+=== opencode.json ===
+Model: opencode/space-bunny-free
+Plugins: opencode-vibeguard, opencode-shell-strategy, @tarquinen/opencode-dcp, @zenobius/opencode-skillful
+MCPs: playwright, memory, context7, github
+Instructions: C:\Users\E\.config\opencode\plugin\shell-strategy\shell_strategy.md
+=== global npm plugins ===
+
++-- @tarquinen/opencode-dcp@3.2.0
++-- @zenobius/opencode-skillful@1.2.5
++-- opencode-ai@1.18.35
+`-- opencode-vibeguard@0.1.0
+=== skills ===
+
+Name : face-audit
+
+
+Name : superpowers
+
+=== shell-strategy ===
+True
+
+
