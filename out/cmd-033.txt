@@ -3,7 +3,7 @@ C:\Users\E\AppData\Roaming\npm
 C:\Users\E\AppData\Local\npm-cache
 === try global install ===
 
-added 1 package in 582ms
+changed 1 package in 590ms
 === check global ===
 C:\Users\E\AppData\Roaming\npm
 +-- opencode-ai@1.18.35
