@@ -1,0 +1,8 @@
+=== node ===
+node not found
+npm not found
+=== opencode ===
+opencode not installed
+=== existing config ===
+False
+False
