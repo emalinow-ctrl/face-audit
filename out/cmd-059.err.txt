@@ -1,0 +1,12 @@
+python : Traceback (most recent call last):
+At C:\Users\E\relay\run.ps1:4 char:1
++ python "$env:TEMP\opencode_patch.py" 2>&1
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Traceback (most recent call last)::String) [], Remot 
+   eException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  File "C:\Users\E\AppData\Local\Temp\opencode_patch.py", line 48, in <module>
+    assert old_verdict_guard in text, "POST guard not found"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: POST guard not found
