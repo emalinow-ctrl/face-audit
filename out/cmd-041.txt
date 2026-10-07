@@ -1,0 +1,8 @@
+=== looking for example config ===
+
+FullName                                                                                    
+--------                                                                                    
+C:\Users\E\AppData\Roaming\npm\node_modules\opencode-vibeguard\vibeguard.config.json.example
+C:\Users\E\AppData\Roaming\npm\node_modules\opencode-vibeguard\vibeguard.config.json.example
+
+
