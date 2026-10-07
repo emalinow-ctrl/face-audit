@@ -1,9 +1,9 @@
-hermes : hermes -z: agent failed: No usable credentials found for provider 'opencode-zen'. Set 
-OPENCODE_ZEN_API_KEY.
+hermes : hermes -z: agent failed: No usable credentials found for provider 'opencode-zen'. Set OPENCODE_ZEN_API_KEY.
 At line:3 char:3
 +   hermes -z "Reply with exactly: HERMES_OK" --provider zen -m "space- ...
 +   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : NotSpecified: (hermes -z: agen...DE_ZEN_API_KEY.:String) [], Remote 
-   Exception
+    + CategoryInfo          : NotSpecified: (hermes -z: agen...DE_ZEN_API_KEY.:String) [], RemoteException
     + FullyQualifiedErrorId : NativeCommandError
+ 
+ror
  
