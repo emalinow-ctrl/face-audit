@@ -1,0 +1,12 @@
+=== RustDesk status ===
+
+   Id ProcessName
+   -- -----------
+ 5456 RustDesk   
+10832 RustDesk   
+13008 RustDesk   
+=== ID file ===
+=== trying to get ID via CLI ===
+155145136
+
+
