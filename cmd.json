@@ -1,6 +1,6 @@
 {
-  "id": "cmd-071",
+  "id": "cmd-072",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "\"=== disk ===\"\n$disk = Get-WmiObject Win32_LogicalDisk -Filter \"DeviceID='C:'\"\n\"Free: \" + [math]::Round($disk.FreeSpace/1GB,1) + \" GB\"\n\"Total: \" + [math]::Round($disk.Size/1GB,1) + \" GB\"\n\"=== config ===\"\nGet-Content \"C:\\Users\\E\\Desktop\\audit2\\config.yaml\" | Select-String \"output_dir|input_dir\" | Select-Object -First 4\n"
+  "script": "\"=== main.py size and structure ===\"\n$lines = (Get-Content \"C:\\Users\\E\\Desktop\\audit2\\main.py\").Count\n\"Lines: $lines\"\n\"=== functions ===\"\nSelect-String -Path \"C:\\Users\\E\\Desktop\\audit2\\main.py\" -Pattern \"^def |^class \" | Select-Object Line | Select-Object -First 15\n\"=== threshold usage ===\"\nSelect-String -Path \"C:\\Users\\E\\Desktop\\audit2\\main.py\" -Pattern \"det_thresh|face_confidence|edge_threshold|pixel_flat|pixel_lap\" | Select-Object LineNumber, Line | Select-Object -First 10\n"
 }
