@@ -1,1 +1,20 @@
 === looking for FairFace data ===
+
+Name                  
+----                  
+audit_out             
+ground_truth          
+videos                
+club_a                
+club_b                
+review                
+vid49                 
+checkpoints.sqlite    
+checkpoints.sqlite-shm
+checkpoints.sqlite-wal
+=== original generation script ===
+=== check tools dir ===
+relay-poller.ps1      
+relay-setup.md        
+
+
