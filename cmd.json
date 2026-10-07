@@ -1,6 +1,6 @@
 {
-  "id": "cmd-051",
+  "id": "cmd-052",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "\"=== status_server.py structure ===\"\nGet-Content \"$env:USERPROFILE\\Desktop\\audit2\\status_server.py\" | Select-Object -First 80\n"
+  "script": "\"=== request handler ===\"\nSelect-String -Path \"$env:USERPROFILE\\Desktop\\audit2\\status_server.py\" -Pattern \"def do_GET|def do_POST|class.*Handler\" | Select-Object LineNumber, Line | Select-Object -First 10\n\"=== total lines ===\"\n(Get-Content \"$env:USERPROFILE\\Desktop\\audit2\\status_server.py\").Count\n"
 }
