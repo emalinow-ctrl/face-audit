@@ -1,6 +1,6 @@
 {
-  "id": "cmd-035",
+  "id": "cmd-036",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "$env:Path = [System.Environment]::GetEnvironmentVariable(\"Path\",\"Machine\") + \";\" + [System.Environment]::GetEnvironmentVariable(\"Path\",\"User\")\n\"=== installing shell-strategy ===\"\nnpm install -g opencode-shell-strategy 2>&1 | Select-Object -Last 5\n\"=== installing skillful ===\"\nnpm install -g @zenobius/opencode-skillful 2>&1 | Select-Object -Last 5\n\"=== installing dcp ===\"\nnpm install -g @tarquinen/opencode-dcp 2>&1 | Select-Object -Last 5\n\"=== verify ===\"\nnpm list -g --depth=0 2>&1\n"
+  "script": "$env:Path = [System.Environment]::GetEnvironmentVariable(\"Path\",\"Machine\") + \";\" + [System.Environment]::GetEnvironmentVariable(\"Path\",\"User\")\n\"=== shell-strategy retry ===\"\nnpm install -g opencode-shell-strategy --verbose 2>&1 | Select-Object -Last 10\n\"=== build dcp ===\"\ncd \"C:\\Users\\E\\AppData\\Roaming\\npm\\node_modules\\@tarquinen\\opencode-dcp\"\nnpm run build 2>&1 | Select-Object -Last 8\n\"=== verify ===\"\nnpm list -g --depth=0 2>&1 | Select-Object -First 10\n"
 }
