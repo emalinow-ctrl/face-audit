@@ -2,17 +2,16 @@ node.exe : npm warn using --force Recommended protections disabled.
 At line:1 char:1
 + & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
 + ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : NotSpecified: (npm warn using ...tions disabled.:String) [], Remote 
-   Exception
+    + CategoryInfo          : NotSpecified: (npm warn using ...tions disabled.:String) [], RemoteException
     + FullyQualifiedErrorId : NativeCommandError
  
 npm error code E404
 npm error 404 Not Found - GET https://registry.npmjs.org/opencode-shell-strategy - Not found
 npm error 404
-npm error 404  The requested resource 'opencode-shell-strategy@*' could not be found or you do 
-not have permission to access it.
+npm error 404  The requested resource 'opencode-shell-strategy@*' could not be found or you do not have permission to 
+access it.
 npm error 404
 npm error 404 Note that you can also install from a
 npm error 404 tarball, folder, http url, or git url.
 npm error A complete log of this run can be found in: 
-C:\Users\E\AppData\Local\npm-cache\_logs\2026-10-07T04_31_22_505Z-debug-0.log
+C:\Users\E\AppData\Local\npm-cache\_logs\2026-10-07T04_31_47_455Z-debug-0.log
