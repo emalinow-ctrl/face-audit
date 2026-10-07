@@ -1,6 +1,6 @@
 {
-  "id": "cmd-112",
+  "id": "cmd-113",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "$env:Path += \";C:\\Users\\E\\AppData\\Local\\hermes\\bin\"\n\"=== current model config ===\"\nhermes config get model.default 2>&1 | Select-Object -First 2\n\"=== testing with default ===\"\n$job = Start-Job -ScriptBlock {\n  $env:Path += \";C:\\Users\\E\\AppData\\Local\\hermes\\bin\"\n  hermes -z \"Say HI\" 2>&1\n}\nif (Wait-Job $job -Timeout 60) {\n  $out = Receive-Job $job\n  \"Output length: $($out.Count)\"\n  $out | Select-Object -First 10\n} else {\n  \"TIMED OUT\"\n  Stop-Job $job\n}\nRemove-Job $job -Force\n"
+  "script": "$env:Path += \";C:\\Users\\E\\AppData\\Local\\hermes\\bin\"\n\"=== trying providers dict format ===\"\nhermes config set providers.zen.base_url \"https://opencode.ai/zen/v1\" 2>&1 | Select-Object -First 2\nhermes config set providers.zen.key_env \"ZEN_API_KEY\" 2>&1 | Select-Object -First 2\nhermes config set providers.zen.name \"OpenCode Zen\" 2>&1 | Select-Object -First 2\n\"=== testing ===\"\n$job = Start-Job -ScriptBlock {\n  $env:Path += \";C:\\Users\\E\\AppData\\Local\\hermes\\bin\"\n  hermes -z \"Say HI\" -m \"space-bunny-free\" --provider zen 2>&1 | Select-Object -First 10\n}\nif (Wait-Job $job -Timeout 60) {\n  Receive-Job $job | Select-Object -First 10\n} else {\n  \"TIMED OUT\"\n  Stop-Job $job\n}\nRemove-Job $job -Force\n"
 }
