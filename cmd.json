@@ -1,6 +1,6 @@
 {
-  "id": "cmd-082",
+  "id": "cmd-083",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "Select-String -Path \"C:\\Users\\E\\AppData\\Local\\hermes\\config.yaml\" -Pattern \"model:|provider:|api_key|api_base\" | Select-Object LineNumber, Line | Select-Object -First 15\n"
+  "script": "(Get-Content \"C:\\Users\\E\\AppData\\Local\\hermes\\config.yaml\")[70..110] -join \"`n\"\n"
 }
