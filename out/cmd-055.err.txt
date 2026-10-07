@@ -1,0 +1,20 @@
+python : Traceback (most recent call last):
+At C:\Users\E\relay\run.ps1:6 char:1
++ python "$env:TEMP\opencode_patch.py" 2>&1
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Traceback (most recent call last)::String) [], Remot 
+   eException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  File "C:\Users\E\AppData\Local\Temp\opencode_patch.py", line 5, in <module>
+    text = p.read_text()
+  File "C:\Users\E\AppData\Local\Programs\Python\Python314\Lib\pathlib\__init__.py", line 788, in 
+read_text
+    return f.read()
+           ~~~~~~^^
+  File "C:\Users\E\AppData\Local\Programs\Python\Python314\Lib\encodings\cp1252.py", line 23, in 
+decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x90 in position 7013: character maps to 
+<undefined>
