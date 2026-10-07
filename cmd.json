@@ -1,6 +1,6 @@
 {
-  "id": "cmd-017",
+  "id": "cmd-018",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "\"=== installing OpenCode via npm ===\"\n$env:Path = [System.Environment]::GetEnvironmentVariable(\"Path\",\"Machine\") + \";\" + [System.Environment]::GetEnvironmentVariable(\"Path\",\"User\")\ntry {\n  npm install -g opencode-ai 2>&1 | Select-Object -Last 5\n  \"npm install done\"\n} catch {\n  \"NPM FAILED: \" + $_.Exception.Message\n  exit 1\n}\n\"=== verifying ===\"\ntry {\n  opencode --version\n} catch {\n  \"opencode not in PATH, checking npm global bin\"\n  npm root -g\n}\n"
+  "script": "$env:Path = [System.Environment]::GetEnvironmentVariable(\"Path\",\"Machine\") + \";\" + [System.Environment]::GetEnvironmentVariable(\"Path\",\"User\")\ncd \"$env:USERPROFILE\\Desktop\\audit2\"\n\"=== checking opencode auth status ===\"\ntry {\n  opencode auth list 2>&1 | Select-Object -First 10\n} catch {\n  \"auth list failed: \" + $_.Exception.Message\n}\n\"=== checking available models ===\"\ntry {\n  opencode models 2>&1 | Select-Object -First 20\n} catch {\n  \"models list failed\"\n}\n"
 }
