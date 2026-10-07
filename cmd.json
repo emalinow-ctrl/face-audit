@@ -1,6 +1,6 @@
 {
-  "id": "cmd-027",
+  "id": "cmd-028",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "$env:Path = [System.Environment]::GetEnvironmentVariable(\"Path\",\"Machine\") + \";\" + [System.Environment]::GetEnvironmentVariable(\"Path\",\"User\")\n$configDir = \"$env:USERPROFILE\\.config\\opencode\"\ncd $configDir\n\"=== installing plugins ===\"\nnpm install opencode-vibeguard opencode-shell-strategy @tarquinen/opencode-dcp @zenobius/opencode-skillful 2>&1 | Select-Object -Last 5\n\"=== building dcp (needs build step) ===\"\ncd \"$configDir\\node_modules\\@tarquinen\\opencode-dcp\"\nnpm run build 2>&1 | Select-Object -Last 5\n\"=== verifying ===\"\nGet-ChildItem \"$configDir\\node_modules\" | Select-Object Name | Select-Object -First 10\n"
+  "script": "$env:Path = [System.Environment]::GetEnvironmentVariable(\"Path\",\"Machine\") + \";\" + [System.Environment]::GetEnvironmentVariable(\"Path\",\"User\")\n$configDir = \"$env:USERPROFILE\\.config\\opencode\"\n\"=== node_modules contents ===\"\nif (Test-Path \"$configDir\\node_modules\") {\n  Get-ChildItem \"$configDir\\node_modules\" -Directory | Select-Object Name\n} else {\n  \"node_modules NOT FOUND\"\n}\n\"=== check dcp build ===\"\nif (Test-Path \"$configDir\\node_modules\\@tarquinen\\opencode-dcp\\dist\") {\n  \"dcp dist exists\"\n} else {\n  \"dcp dist MISSING\"\n}\n"
 }
