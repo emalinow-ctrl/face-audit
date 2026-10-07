@@ -1,0 +1,15 @@
+npm error 404  The requested resource 'opencode-shell-strategy@*' could not be found or you do not have permission to 
+access it.
+npm error 404
+npm error 404 Note that you can also install from a
+npm error 404 tarball, folder, http url, or git url.
+npm error A complete log of this run can be found in: 
+C:\Users\E\AppData\Local\npm-cache\_logs\2026-10-07T04_36_59_295Z-debug-0.log
+npm error syscall rmdir
+npm error path 
+C:\Users\E\AppData\Roaming\npm\node_modules\@tarquinen\opencode-dcp\node_modules\effect\dist\unstable\cluster
+npm error errno -4051
+npm error ENOTEMPTY: directory not empty, rmdir 
+'C:\Users\E\AppData\Roaming\npm\node_modules\@tarquinen\opencode-dcp\node_modules\effect\dist\unstable\cluster'
+npm error A complete log of this run can be found in: 
+C:\Users\E\AppData\Local\npm-cache\_logs\2026-10-07T04_37_03_247Z-debug-0.log
