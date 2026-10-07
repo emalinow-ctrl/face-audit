@@ -1,0 +1,5 @@
+=== pull ===
+3ea5fd7 dashboard: flagged-frames gallery tab with tinder-style accept/deny reviewer
+=== restart dashboard ===
+stopped old dashboard
+stopped old dashboard
