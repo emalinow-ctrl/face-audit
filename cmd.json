@@ -1,6 +1,6 @@
 {
-  "id": "cmd-040",
+  "id": "cmd-041",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "$configDir = \"$env:USERPROFILE\\.config\\opencode\"\n$config = Get-Content \"$configDir\\opencode.json\" | ConvertFrom-Json\n$config.plugin = @(\"opencode-vibeguard\", \"@tarquinen/opencode-dcp\", \"@zenobius/opencode-skillful\")\n$config | ConvertTo-Json -Depth 10 | Out-File -FilePath \"$configDir\\opencode.json\" -Encoding utf8\n\"Fixed. Plugins now: \" + ($config.plugin -join \", \")\n"
+  "script": "$vibeguardPath = \"C:\\Users\\E\\AppData\\Roaming\\npm\\node_modules\\opencode-vibeguard\"\n\"=== looking for example config ===\"\nGet-ChildItem $vibeguardPath -Recurse -Filter \"*.example*\" 2>$null | Select-Object FullName | Select-Object -First 5\nGet-ChildItem $vibeguardPath -Recurse -Filter \"vibeguard*\" 2>$null | Select-Object FullName | Select-Object -First 10\n"
 }
