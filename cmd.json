@@ -1,6 +1,6 @@
 {
-  "id": "cmd-044",
+  "id": "cmd-046",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "\"GITHUB_TOKEN set: \" + (-not [string]::IsNullOrEmpty([Environment]::GetEnvironmentVariable(\"GITHUB_TOKEN\", \"User\")))\n\"Token prefix: \" + ([Environment]::GetEnvironmentVariable(\"GITHUB_TOKEN\", \"User\")).Substring(0, 8) + \"...\"\n"
+  "script": "$env:Path = [System.Environment]::GetEnvironmentVariable(\"Path\",\"Machine\") + \";\" + [System.Environment]::GetEnvironmentVariable(\"Path\",\"User\")\ncd \"$env:USERPROFILE\\Desktop\\audit2\"\n\"=== testing opencode ===\"\n$job = Start-Job -ScriptBlock {\n  $env:Path = [System.Environment]::GetEnvironmentVariable(\"Path\",\"Machine\") + \";\" + [System.Environment]::GetEnvironmentVariable(\"Path\",\"User\")\n  Set-Location \"$env:USERPROFILE\\Desktop\\audit2\"\n  \"test\" | opencode run \"Reply with exactly: SPACEBUNNY_OK\" 2>&1\n}\nif (Wait-Job $job -Timeout 60) {\n  $result = Receive-Job $job\n  \"Result: $result\"\n} else {\n  \"TIMED OUT after 60s\"\n  Stop-Job $job\n}\nRemove-Job $job -Force\n\"=== GITHUB_TOKEN check ===\"\n\"Token set: \" + (-not [string]::IsNullOrEmpty([Environment]::GetEnvironmentVariable(\"GITHUB_TOKEN\", \"User\")))\n"
 }
