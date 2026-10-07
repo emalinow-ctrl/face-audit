@@ -1,6 +1,6 @@
 {
-  "id": "cmd-018",
+  "id": "cmd-019",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "$env:Path = [System.Environment]::GetEnvironmentVariable(\"Path\",\"Machine\") + \";\" + [System.Environment]::GetEnvironmentVariable(\"Path\",\"User\")\ncd \"$env:USERPROFILE\\Desktop\\audit2\"\n\"=== checking opencode auth status ===\"\ntry {\n  opencode auth list 2>&1 | Select-Object -First 10\n} catch {\n  \"auth list failed: \" + $_.Exception.Message\n}\n\"=== checking available models ===\"\ntry {\n  opencode models 2>&1 | Select-Object -First 20\n} catch {\n  \"models list failed\"\n}\n"
+  "script": "$env:Path = [System.Environment]::GetEnvironmentVariable(\"Path\",\"Machine\") + \";\" + [System.Environment]::GetEnvironmentVariable(\"Path\",\"User\")\ncd \"$env:USERPROFILE\\Desktop\\audit2\"\n\"=== opencode config dir ===\"\nGet-ChildItem \"$env:USERPROFILE\\.config\\opencode\" -ErrorAction SilentlyContinue | Select-Object Name\n\"=== trying simple run ===\"\necho \"hello\" | opencode run \"say OK\" 2>&1 | Select-Object -First 15\n"
 }
