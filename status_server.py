@@ -70,7 +70,11 @@ h2{margin:0 0 4px} .sub{color:#888;font-size:13px;margin-bottom:18px}
 .kv .v{font-size:22px;font-weight:700}.kv .k{font-size:11px;color:#888}
 #err{color:#ff8a8a;font-size:13px}
 /* flagged tab */
-#gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;margin-top:12px}
+#gallery{margin-top:12px}
+.video-section{margin-bottom:24px}
+.video-header{font-size:15px;font-weight:600;margin-bottom:10px;padding-bottom:6px;
+  border-bottom:1px solid #2c2c34}
+.video-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
 .thumb{position:relative;cursor:pointer;border-radius:8px;overflow:hidden;border:2px solid #2c2c34}
 .thumb img{width:100%;height:110px;object-fit:cover;display:block}
 .thumb .cap{font-size:11px;color:#aaa;padding:4px 6px;background:#18181e}
@@ -197,16 +201,31 @@ async function loadFlagged(){
     flagged.length===0 ? 'No flagged frames yet — run the pipeline first.'
     : `${flagged.length} images flagged · ${unrev} ready to review` +
       (unrev===0 ? ' — all reviewed ✓' : ' — tap any frame to start swiping');
+  // group frames by video
+  const byVideo={};
+  flagged.forEach((f,i)=>{ f._idx=i; (byVideo[f.video]=byVideo[f.video]||[]).push(f); });
   const g = document.getElementById('gallery'); g.innerHTML='';
-  flagged.forEach((f,i)=>{
-    const el=document.createElement('div');
-    el.className='thumb'+(f.verdict==='accept'?' done-accept':f.verdict==='deny'?' done-deny':'');
-    el.innerHTML=`${f.verdict?`<div class="badge">${f.verdict==='accept'?'♥':'✕'}</div>`:''}`+
-      `<img loading="lazy" src="/api/flagged_img?img=${encodeURIComponent(f.image)}">`+
-      `<div class="cap">${esc(f.video)} · ${esc(f.t)}</div>`;
-    el.onclick=()=>openReview(i);
-    g.appendChild(el);
-  });
+  for(const video of Object.keys(byVideo).sort()){
+    const frames=byVideo[video];
+    const vUnrev=frames.filter(f=>!f.verdict).length;
+    const sec=document.createElement('div');
+    sec.className='video-section';
+    sec.innerHTML=`<div class="video-header">${esc(video)} <span class="meta">`+
+      `${frames.length} frames · ${vUnrev} to review</span></div>`;
+    const grid=document.createElement('div');
+    grid.className='video-grid';
+    frames.forEach(f=>{
+      const el=document.createElement('div');
+      el.className='thumb'+(f.verdict==='accept'?' done-accept':f.verdict==='deny'?' done-deny':'');
+      el.innerHTML=`${f.verdict?`<div class="badge">${f.verdict==='accept'?'♥':'✕'}</div>`:''}`+
+        `<img loading="lazy" src="/api/flagged_img?img=${encodeURIComponent(f.image)}">`+
+        `<div class="cap">${esc(f.t)} · ${f.faces_failed} face(s)</div>`;
+      el.onclick=()=>openReview(f._idx);
+      grid.appendChild(el);
+    });
+    sec.appendChild(grid);
+    g.appendChild(sec);
+  }
 }
 /* ---------- tinder reviewer ---------- */
 function openReview(i){
