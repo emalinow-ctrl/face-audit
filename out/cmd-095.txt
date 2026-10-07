@@ -6,7 +6,7 @@ are not allowed
   ✓ No retired xAI models in config
 ◆ Auth Providers
     → No xAI OAuth credentials stored. Select xAI Grok OAuth (SuperGrok / Premium+) in `hermes 
-model◆ Memory Provider
+model◆ ◆ Memory Provider
   ✓ Built-in memory active (no external provider configured — this is fine)
 
 
