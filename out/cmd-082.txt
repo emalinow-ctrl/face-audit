@@ -1,0 +1,20 @@
+
+LineNumber Line                                                                                          
+---------- ----                                                                                          
+        72 model:                                                                                        
+        79   #   "openrouter"   - OpenRouter (requires: OPENROUTER_API_KEY or OPENAI_API_KEY)            
+        81   #   "nous-api"     - Nous Portal API key (requires: NOUS_API_KEY)                           
+        82   #   "anthropic"    - Direct Anthropic API (requires: ANTHROPIC_API_KEY)                     
+        85   #   "gemini"      - Use Google AI Studio direct (requires: GOOGLE_API_KEY or GEMINI_API_KEY)
+        86   #   "zai"         - Use z.ai / ZhipuAI GLM models (requires: GLM_API_KEY)                   
+        87   #   "kimi-coding"  - Kimi / Moonshot AI (requires: KIMI_API_KEY)                            
+        88   #   "minimax"      - MiniMax global (requires: MINIMAX_API_KEY)                             
+        89   #   "minimax-cn"   - MiniMax China (requires: MINIMAX_CN_API_KEY)                           
+        91   #   "nvidia"       - NVIDIA NIM / build.nvidia.com (requires: NVIDIA_API_KEY)               
+        92   #   "xiaomi"       - Xiaomi MiMo (requires: XIAOMI_API_KEY)                                 
+        93   #   "arcee"        - Arcee AI Trinity models (requires: ARCEEAI_API_KEY)                    
+        94   #   "ollama-cloud" - Ollama Cloud (requires: OLLAMA_API_KEY - https://ollama.com/settings)  
+        95   #   "deepinfra"    - DeepInfra (requires: DEEPINFRA_API_KEY)                                
+        96   #   "kilocode"     - KiloCode gateway (requires: KILOCODE_API_KEY)                          
+
+
