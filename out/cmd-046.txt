@@ -1,0 +1,4 @@
+=== testing opencode ===
+TIMED OUT after 60s
+=== GITHUB_TOKEN check ===
+Token set: True
