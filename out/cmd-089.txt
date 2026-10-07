@@ -1,0 +1,30 @@
+    → state.db: WAL journal mode (512.0 KB)
+    → cron/executions.db: WAL journal mode (24.0 KB)
+    → projects.db: WAL journal mode (44.0 KB)
+  ✓ Runtime venv staged (C:\Users\E\AppData\Local\hermes\installs\a339f2f7fb889669\environments\735c98a741eb4a78b4a67898525f9851\venv) (active in this process)
+
+◆ SSL / CA Certificates
+  ✓ TLS platform trust store configured; default SSL context available
+
+◆ Required Packages
+  ✓ OpenAI SDK
+  ✓ Rich (terminal UI)
+  ✓ python-dotenv
+  ✓ ruamel.yaml
+  ✓ HTTPX
+  ✓ Croniter (cron expressions) (optional)
+  ⚠ python-telegram-bot (optional, not installed)
+  ⚠ discord.py (optional, not installed)
+  ✓ Dashboard web surface (imports cleanly)
+
+◆ Configuration Files
+  ✓ ~/AppData/Local/hermes/.env file exists
+  ✓ API key or custom endpoint configured
+  ✓ ~/AppData/Local/hermes/config.yaml exists
+  ⚠ Could not validate model/provider config (unacceptable character #x008f: special characters are not allowed
+  in "<unicode string>", position 102091)
+  ⚠ Could not validate auxiliary task routing (unacceptable character #x008f: special characters are not allowed
+  in "<unicode string>", position 102091)
+  ✓ Config version up to date (v50)
+
+◆ xAI Model Retirement (May 15, 2026)
