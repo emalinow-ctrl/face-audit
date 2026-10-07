@@ -1,6 +1,6 @@
 {
-  "id": "cmd-096",
+  "id": "cmd-097",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "\"=== finding clean config ===\"\n$src = \"C:\\Users\\E\\AppData\\Local\\hermes\\hermes-agent\"\nGet-ChildItem $src -Filter \"config.yaml\" -Recurse 2>$null | Select-Object FullName | Select-Object -First 3\n\"=== checking example config ===\"\nGet-ChildItem $src -Filter \"*.example*\" -Recurse 2>$null | Select-Object FullName | Select-Object -First 3\n"
+  "script": "$hermesDir = \"C:\\Users\\E\\AppData\\Local\\hermes\"\n\"=== restoring clean config ===\"\nCopy-Item \"$hermesDir\\hermes-agent\\cli-config.yaml.example\" \"$hermesDir\\config.yaml\" -Force\n\"Restored clean config\"\n\"=== applying model settings via Python (safe YAML) ===\"\npython3 <<'PYEOF'\nimport re\np = r\"C:\\Users\\E\\AppData\\Local\\hermes\\config.yaml\"\ntext = open(p, encoding='utf-8').read()\n# Use precise replacements on the default values\ntext = text.replace('default: \"stealth/space-bunny-alpha\"', 'default: \"space-bunny-free\"')\n# Find provider line under model: section and replace\ntext = re.sub(r'(?m)^  provider: \"nous\"$', '  provider: \"custom\"', text)\ntext = text.replace('base_url: \"https://inference-api.nousresearch.com/v1\"', 'base_url: \"https://opencode.ai/zen/v1\"')\nopen(p, 'w', encoding='utf-8').write(text)\nprint(\"Model settings applied\")\nPYEOF\n\"=== verifying ===\"\n$env:Path += \";C:\\Users\\E\\AppData\\Local\\hermes\\bin\"\nhermes doctor 2>&1 | Select-String \"model/provider|space-bunny|custom endpoint\" | Select-Object -First 5\n"
 }
