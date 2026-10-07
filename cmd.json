@@ -1,6 +1,6 @@
 {
-  "id": "cmd-100",
+  "id": "cmd-101",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "\"=== direct Zen API test ===\"\n$envContent = Get-Content \"C:\\Users\\E\\AppData\\Local\\hermes\\.env\" -Raw\n$token = ($envContent -split \"`n\" | Where-Object { $_ -match \"^OPENAI_API_KEY=\" }) -replace \"OPENAI_API_KEY=\", \"\"\n$token = $token.Trim()\n\"Token length: $($token.Length)\"\ntry {\n  $headers = @{ \"Authorization\" = \"Bearer $token\" }\n  $resp = Invoke-WebRequest -Uri \"https://opencode.ai/zen/v1/models\" -Headers $headers -TimeoutSec 15 -UseBasicParsing\n  \"Models endpoint: $($resp.StatusCode) OK\"\n} catch {\n  \"Models failed: $($_.Exception.Message)\"\n}\n"
+  "script": "$auth = Get-Content \"$env:USERPROFILE\\.local\\share\\opencode\\auth.json\" | ConvertFrom-Json\n$token = $auth.opencode.key\n\"Token length: $($token.Length)\"\n$envPath = \"C:\\Users\\E\\AppData\\Local\\hermes\\.env\"\n\"OPENAI_API_KEY=$token\" | Out-File -FilePath $envPath -Encoding utf8\n\"Written to .env\"\nGet-Content $envPath | ForEach-Object { if ($_ -match \"^OPENAI_API_KEY=\") { \"OPENAI_API_KEY=\" + $_.Substring(15, 10) + \"...\" } }\n"
 }
