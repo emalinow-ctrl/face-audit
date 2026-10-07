@@ -1,6 +1,6 @@
 {
-  "id": "cmd-088",
+  "id": "cmd-089",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "$env:Path += \";C:\\Users\\E\\AppData\\Local\\hermes\\bin\"\n\"=== hermes doctor ===\"\nhermes doctor 2>&1 | Select-Object -First 30\n"
+  "script": "$env:Path += \";C:\\Users\\E\\AppData\\Local\\hermes\\bin\"\nhermes doctor 2>&1 | Select-Object -Skip 20 | Select-Object -First 30\n"
 }
