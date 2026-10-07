@@ -1,0 +1,15 @@
+                _save_opencode_status(self.ctx.out_dir, body)
+            except (ValueError, KeyError, TypeError):
+                return self._send(400, b"bad request", "text/plain")
+            return self._json({"ok": True})
+        if ppath != "/api/verdict":
+            return self._send(404, b"not found", "text/plain")
+        try:
+            body = json.loads(self.rfile.read(int(self.headers.get("Content-Length", 0))))
+            image = str(body["image"])
+            verdict = str(body["verdict"])
+            assert verdict in ("accept", "deny")
+            assert self._resolve_image(image) is not None
+        except (ValueError, AssertionError, KeyError, TypeError):
+            return self._send(400, b"bad request", "text/plain")
+        _save_verdict(self.ctx.out_dir, image, verdict)
