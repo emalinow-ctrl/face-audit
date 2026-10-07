@@ -1,6 +1,6 @@
 {
-  "id": "cmd-039",
+  "id": "cmd-040",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "$env:Path = [System.Environment]::GetEnvironmentVariable(\"Path\",\"Machine\") + \";\" + [System.Environment]::GetEnvironmentVariable(\"Path\",\"User\")\n$configDir = \"$env:USERPROFILE\\.config\\opencode\"\n\"=== opencode.json ===\"\n$config = Get-Content \"$configDir\\opencode.json\" | ConvertFrom-Json\n\"Model: \" + $config.model\n\"Plugins: \" + ($config.plugin -join \", \")\n\"MCPs: \" + (($config.mcp.PSObject.Properties.Name) -join \", \")\n\"Instructions: \" + ($config.instructions -join \", \")\n\"=== global npm plugins ===\"\nnpm list -g --depth=0 2>&1 | Select-String \"opencode|skillful|dcp\"\n\"=== skills ===\"\nGet-ChildItem \"$configDir\\skills\" -Directory | Select-Object Name\n\"=== shell-strategy ===\"\nTest-Path \"$configDir\\plugin\\shell-strategy\\shell_strategy.md\"\n"
+  "script": "$configDir = \"$env:USERPROFILE\\.config\\opencode\"\n$config = Get-Content \"$configDir\\opencode.json\" | ConvertFrom-Json\n$config.plugin = @(\"opencode-vibeguard\", \"@tarquinen/opencode-dcp\", \"@zenobius/opencode-skillful\")\n$config | ConvertTo-Json -Depth 10 | Out-File -FilePath \"$configDir\\opencode.json\" -Encoding utf8\n\"Fixed. Plugins now: \" + ($config.plugin -join \", \")\n"
 }
