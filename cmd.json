@@ -1,6 +1,6 @@
 {
-  "id": "cmd-092",
+  "id": "cmd-093",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "$env:Path += \";C:\\Users\\E\\AppData\\Local\\hermes\\bin\"\n\"=== testing Hermes with Space Bunny ===\"\n$job = Start-Job -ScriptBlock {\n  $env:Path += \";C:\\Users\\E\\AppData\\Local\\hermes\\bin\"\n  hermes -p \"Reply with exactly: HERMES_OK\" 2>&1 | Select-Object -First 10\n}\nif (Wait-Job $job -Timeout 60) {\n  Receive-Job $job\n} else {\n  \"TIMED OUT after 60s\"\n  Stop-Job $job\n}\nRemove-Job $job -Force\n"
+  "script": "$hermesDir = \"C:\\Users\\E\\AppData\\Local\\hermes\"\n\"=== restoring config from backup ===\"\n$backup = Get-ChildItem \"$hermesDir\\backups\" -Filter \"config.yaml*\" 2>$null | Sort-Object LastWriteTime -Descending | Select-Object -First 1\nif ($backup) {\n  Copy-Item $backup.FullName \"$hermesDir\\config.yaml\" -Force\n  \"Restored from: $($backup.Name)\"\n} else {\n  \"No backup found, checking installs...\"\n  Get-ChildItem \"$hermesDir\" -Filter \"*.yaml\" | Select-Object Name\n}\n"
 }
