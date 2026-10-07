@@ -1,0 +1,2 @@
+=== installing OpenCode ===
+INSTALL FAILED: The remote server returned an error: (404) Not Found.
