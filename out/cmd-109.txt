@@ -1,0 +1,8 @@
+=== setting up custom provider ===
+✓ Set custom_providers.zen.type = openai in C:\Users\E\AppData\Local\hermes\config.yaml
+✓ Set custom_providers.zen.base_url = https://opencode.ai/zen/v1 in C:\Users\E\AppData\Local\hermes\config.yaml
+✓ Set custom_providers.zen.api_key = ${ZE...KEY} in C:\Users\E\AppData\Local\hermes\config.yaml
+✓ Redirecting bare 'model' to 'model.default' (preserving 3 existing model sub-key(s))
+✓ Set model.default = custom:zen/space-bunny-free in C:\Users\E\AppData\Local\hermes\config.yaml
+=== setting ZEN_API_KEY in .env ===
+Done

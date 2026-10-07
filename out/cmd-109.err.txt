@@ -1,0 +1,7 @@
+Cannot index into a null array.
+At C:\Users\E\relay\run.ps1:8 char:1
++ $token = (Get-Content "C:\Users\E\AppData\Local\hermes\.env" -Raw | S ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : NullArray
+ 
