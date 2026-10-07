@@ -1,1 +1,6 @@
 SKILL.md written
+---
+name: face-audit
+description: Workflow for the offline face-censorship audit pipeline. Use when optimizing, debugging, or running the face-audit project. Covers the pipeline architecture, key files, testing workflow, and dashboard integration.
+---
+
