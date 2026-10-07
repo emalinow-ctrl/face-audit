@@ -1,6 +1,6 @@
 {
-  "id": "cmd-053",
+  "id": "cmd-054",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "\"=== do_POST handler ===\"\nGet-Content \"$env:USERPROFILE\\Desktop\\audit2\\status_server.py\" | Select-Object -Skip 561 -First 40\n"
+  "script": "\"=== tabs in HTML ===\"\nSelect-String -Path \"$env:USERPROFILE\\Desktop\\audit2\\status_server.py\" -Pattern 'class=\"tab\"|id=\"tabs\"' | Select-Object Line | Select-Object -First 5\n\"=== do_GET routes ===\"\nGet-Content \"$env:USERPROFILE\\Desktop\\audit2\\status_server.py\" | Select-Object -Skip 519 -First 42\n"
 }
