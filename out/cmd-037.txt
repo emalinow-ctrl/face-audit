@@ -1,0 +1,20 @@
+=== cloning shell-strategy ===
+=== updating opencode.json to add instructions ===
+opencode.json updated with instructions
+=== cloning superpowers ===
+=== verify ===
+
+Name             
+----             
+.gitignore       
+LICENSE          
+package.json     
+README.md        
+shell_strategy.md
+.agents          
+.claude-plugin   
+.codex-plugin    
+.cursor-plugin   
+.devin-plugin    
+
+

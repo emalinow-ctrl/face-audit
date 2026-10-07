@@ -1,0 +1,16 @@
+git : Cloning into 'C:\Users\E\.config\opencode\plugin\shell-strategy'...
+At C:\Users\E\relay\run.ps1:5 char:3
++   git clone https://github.com/JRedeker/opencode-shell-strategy.git " ...
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Cloning into 'C...ll-strategy'...:String) [], Remote 
+   Exception
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+git : Cloning into 'C:\Users\E\.config\opencode\skills\superpowers'...
+At C:\Users\E\relay\run.ps1:14 char:3
++   git clone https://github.com/obra/superpowers.git "$configDir\skill ...
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Cloning into 'C...superpowers'...:String) [], Remote 
+   Exception
+    + FullyQualifiedErrorId : NativeCommandError
+ 
