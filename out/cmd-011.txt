@@ -1,5 +1,5 @@
 === pull ===
-3ea5fd7 dashboard: flagged-frames gallery tab with tinder-style accept/deny reviewer
+80c6952 dashboard: group flagged frames by video
 === restart dashboard ===
 stopped old dashboard
 stopped old dashboard
