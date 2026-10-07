@@ -1,6 +1,6 @@
 {
-  "id": "cmd-077",
+  "id": "cmd-078",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "\"=== installing Hermes Agent via GitHub ===\"\ntry {\n  irm https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.ps1 -OutFile $env:TEMP\\hermes-install.ps1\n  \"Downloaded installer\"\n  & $env:TEMP\\hermes-install.ps1 2>&1 | Select-Object -Last 10\n} catch {\n  \"Install failed: \" + $_.Exception.Message\n}\n"
+  "script": "\"=== checking hermes install ===\"\nGet-ChildItem \"C:\\Users\\E\\AppData\\Local\\hermes\" | Select-Object Name | Select-Object -First 10\n\"=== trying hermes directly ===\"\n$env:Path += \";C:\\Users\\E\\AppData\\Local\\hermes\\bin\"\nhermes --version 2>&1 | Select-Object -First 3\n\"=== check for hermes exe ===\"\nGet-ChildItem \"C:\\Users\\E\\AppData\\Local\\hermes\" -Recurse -Filter \"hermes.exe\" 2>$null | Select-Object FullName | Select-Object -First 3\n"
 }
