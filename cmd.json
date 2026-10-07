@@ -1,6 +1,6 @@
 {
-  "id": "cmd-104",
+  "id": "cmd-105",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "$b64 = \"b2Nfc2tfZDEyMGNiYTg1YWQzX25XZXo4cHJzXy00VjFuR1pZR3I0M29LNXdxWGQyX2oz\"\n$key = [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($b64))\n$envPath = \"C:\\Users\\E\\AppData\\Local\\hermes\\.env\"\n\"OPENAI_API_KEY=$key\" | Out-File -FilePath $envPath -Encoding utf8\n\"Key set in .env (length: $($key.Length))\"\n"
+  "script": "$token = (Get-Content \"C:\\Users\\E\\AppData\\Local\\hermes\\.env\" -Raw | Select-String \"OPENAI_API_KEY=(.*)\").Matches.Groups[1].Value.Trim()\ntry {\n  $headers = @{ \"Authorization\" = \"Bearer $token\"; \"Content-Type\" = \"application/json\" }\n  $body = @{ model = \"space-bunny-free\"; messages = @(@{ role = \"user\"; content = \"Say OK\" }); max_tokens = 10 } | ConvertTo-Json -Depth 5\n  $resp = Invoke-WebRequest -Uri \"https://opencode.ai/zen/v1/chat/completions\" -Method Post -Headers $headers -Body $body -TimeoutSec 30 -UseBasicParsing\n  \"Status: $($resp.StatusCode)\"\n  \"Response: \" + ($resp.Content | ConvertFrom-Json).choices[0].message.content\n} catch {\n  \"Error: $($_.Exception.Message)\"\n}\n"
 }
