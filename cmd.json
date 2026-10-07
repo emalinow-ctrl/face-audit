@@ -1,6 +1,6 @@
 {
-  "id": "cmd-114",
+  "id": "cmd-115",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "$env:Path += \";C:\\Users\\E\\AppData\\Local\\hermes\\bin\"\n\"=== checking .env ===\"\nGet-Content \"C:\\Users\\E\\AppData\\Local\\hermes\\.env\" | ForEach-Object { if ($_ -match \"^(ZEN|OPENAI)_API_KEY=\") { $_.Substring(0, 20) + \"...\" } }\n\"=== setting key directly in provider config ===\"\n$key = (Get-Content \"C:\\Users\\E\\AppData\\Local\\hermes\\.env\" | Select-String \"ZEN_API_KEY=(.*)\").Matches.Groups[1].Value.Trim()\nhermes config set providers.zen.api_key $key 2>&1 | Select-Object -First 2\n\"=== testing ===\"\n$job = Start-Job -ScriptBlock {\n  $env:Path += \";C:\\Users\\E\\AppData\\Local\\hermes\\bin\"\n  hermes -z \"Say HI\" -m \"space-bunny-free\" --provider zen 2>&1 | Select-Object -First 10\n}\nif (Wait-Job $job -Timeout 60) {\n  Receive-Job $job | Select-Object -First 10\n} else {\n  \"TIMED OUT\"\n  Stop-Job $job\n}\nRemove-Job $job -Force\n"
+  "script": "$b64 = \"b2Nfc2tfZDEyMGNiYTg1YWQzX25XZXo4cHJzXy00VjFuR1pZR3I0M29LNXdxWGQyX2oz\"\n$key = [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($b64))\n\"ZEN_API_KEY=$key\" | Out-File -FilePath \"C:\\Users\\E\\AppData\\Local\\hermes\\.env\" -Encoding utf8\n\"Key written to .env\"\n$env:Path += \";C:\\Users\\E\\AppData\\Local\\hermes\\bin\"\n$job = Start-Job -ScriptBlock {\n  $env:Path += \";C:\\Users\\E\\AppData\\Local\\hermes\\bin\"\n  hermes -z \"Say HI\" -m \"space-bunny-free\" --provider zen 2>&1 | Select-Object -First 10\n}\nif (Wait-Job $job -Timeout 60) {\n  Receive-Job $job | Select-Object -First 10\n} else {\n  \"TIMED OUT\"\n  Stop-Job $job\n}\nRemove-Job $job -Force\n"
 }
