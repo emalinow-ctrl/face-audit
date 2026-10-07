@@ -1,6 +1,6 @@
 {
-  "id": "cmd-041",
+  "id": "cmd-042",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "$vibeguardPath = \"C:\\Users\\E\\AppData\\Roaming\\npm\\node_modules\\opencode-vibeguard\"\n\"=== looking for example config ===\"\nGet-ChildItem $vibeguardPath -Recurse -Filter \"*.example*\" 2>$null | Select-Object FullName | Select-Object -First 5\nGet-ChildItem $vibeguardPath -Recurse -Filter \"vibeguard*\" 2>$null | Select-Object FullName | Select-Object -First 10\n"
+  "script": "Get-Content \"C:\\Users\\E\\AppData\\Roaming\\npm\\node_modules\\opencode-vibeguard\\vibeguard.config.json.example\"\n"
 }
