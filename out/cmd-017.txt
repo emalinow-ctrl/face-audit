@@ -1,4 +1,5 @@
 === installing OpenCode via npm ===
+changed 3 packages in 5s
 npm install done
 === verifying ===
 1.18.35
