@@ -1,6 +1,6 @@
 {
-  "id": "cmd-029",
+  "id": "cmd-030",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "$env:Path = [System.Environment]::GetEnvironmentVariable(\"Path\",\"Machine\") + \";\" + [System.Environment]::GetEnvironmentVariable(\"Path\",\"User\")\n$configDir = \"$env:USERPROFILE\\.config\\opencode\"\ncd $configDir\n\"npm version: \" + (npm --version 2>&1)\n\"node version: \" + (node --version 2>&1)\n\"=== init package.json if needed ===\"\nif (-not (Test-Path \"package.json\")) {\n  npm init -y 2>&1 | Select-Object -Last 2\n}\n\"=== installing ===\"\nnpm install opencode-vibeguard 2>&1 | Select-Object -Last 10\n"
+  "script": "$env:Path = [System.Environment]::GetEnvironmentVariable(\"Path\",\"Machine\") + \";\" + [System.Environment]::GetEnvironmentVariable(\"Path\",\"User\")\n$configDir = \"$env:USERPROFILE\\.config\\opencode\"\ncd $configDir\n\"=== package.json ===\"\nGet-Content package.json\n\"=== clean install ===\"\nRemove-Item -Recurse -Force node_modules -ErrorAction SilentlyContinue\nRemove-Item package-lock.json -ErrorAction SilentlyContinue\nnpm install opencode-vibeguard opencode-shell-strategy @tarquinen/opencode-dcp @zenobius/opencode-skillful 2>&1 | Select-Object -Last 15\n\"=== verify ===\"\nGet-ChildItem node_modules -Directory | Select-Object Name\n"
 }
