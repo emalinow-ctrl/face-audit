@@ -1,0 +1,40 @@
+=== do_POST handler ===
+        if urlparse(self.path).path != "/api/verdict":
+            return self._send(404, b"not found", "text/plain")
+        try:
+            body = json.loads(self.rfile.read(int(self.headers.get("Content-Length", 0))))
+            image = str(body["image"])
+            verdict = str(body["verdict"])
+            assert verdict in ("accept", "deny")
+            assert self._resolve_image(image) is not None
+        except (ValueError, AssertionError, KeyError, TypeError):
+            return self._send(400, b"bad request", "text/plain")
+        _save_verdict(self.ctx.out_dir, image, verdict)
+        frames = _flagged_frames(self.ctx.out_dir)
+        self._json({"ok": True, "total": len(frames),
+                    "reviewed": sum(1 for f in frames if f["verdict"])})
+
+
+@app.command()
+def serve(
+    config: Path = typer.Option(Path("config.yaml"), "--config", "-c"),
+    host: str = typer.Option("0.0.0.0", "--host"),
+    port: int = typer.Option(8472, "--port", "-p"),
+):
+    cfg = yaml.safe_load(config.read_text())
+    c = Ctx()
+    c.out_dir = Path(cfg["paths"]["output_dir"])
+    c.ckpt_db = Path(cfg["paths"]["checkpoint_db"])
+    c.review_db = Path(cfg.get("review_queue", {}).get("db", "review.sqlite"))
+    c.input_dir = Path(cfg["paths"]["input_dir"])
+    Handler.ctx = c
+    srv = ThreadingHTTPServer((host, port), Handler)
+    print(f"dashboard at http://{host}:{port}  (Ctrl-C to stop)", flush=True)
+    try:
+        srv.serve_forever()
+    except KeyboardInterrupt:
+        print("\nstopped.")
+
+
+if __name__ == "__main__":
+    sys.exit(app())
