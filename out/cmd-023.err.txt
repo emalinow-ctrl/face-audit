@@ -2,7 +2,8 @@
 At C:\Users\E\AppData\Roaming\npm\opencode.ps1:12 char:12
 +   $input | & "$basedir/node_modules/opencode-ai/bin/opencode.exe"   $ ...
 +            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : NotSpecified: ([91m[1mError: [0mUnexpected error:String) [], RemoteException
+    + CategoryInfo          : NotSpecified: ([91m[1mError: [0mUnexpected error:String) [], Rem    
+oteException
     + FullyQualifiedErrorId : NativeCommandError
  
 Database is not empty and has no session table
