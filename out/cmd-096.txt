@@ -1,0 +1,10 @@
+=== finding clean config ===
+=== checking example config ===
+
+FullName                                                                                              
+--------                                                                                              
+C:\Users\E\AppData\Local\hermes\hermes-agent\.env.example                                             
+C:\Users\E\AppData\Local\hermes\hermes-agent\cli-config.yaml.example                                  
+C:\Users\E\AppData\Local\hermes\hermes-agent\contributors\emails\noreply@pacificcloudsolutions.example
+
+
