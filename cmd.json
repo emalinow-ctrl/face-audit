@@ -1,6 +1,6 @@
 {
-  "id": "cmd-032",
+  "id": "cmd-033",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "$env:Path = [System.Environment]::GetEnvironmentVariable(\"Path\",\"Machine\") + \";\" + [System.Environment]::GetEnvironmentVariable(\"Path\",\"User\")\n$configDir = \"$env:USERPROFILE\\.config\\opencode\"\ncd $configDir\nRemove-Item -Recurse -Force node_modules -ErrorAction SilentlyContinue\nRemove-Item package-lock.json -ErrorAction SilentlyContinue\nRemove-Item package.json -ErrorAction SilentlyContinue\nnpm init -y 2>&1 | Out-Null\n\"=== force install ===\"\nnpm install --force opencode-vibeguard opencode-shell-strategy 2>&1 | Select-Object -Last 15\n\"=== verify ===\"\nif (Test-Path \"node_modules\") { Get-ChildItem node_modules -Directory | Select-Object Name } else { \"STILL MISSING\" }\n"
+  "script": "$env:Path = [System.Environment]::GetEnvironmentVariable(\"Path\",\"Machine\") + \";\" + [System.Environment]::GetEnvironmentVariable(\"Path\",\"User\")\n\"=== npm config ===\"\nnpm config get prefix 2>&1\nnpm config get cache 2>&1\n\"=== try global install ===\"\nnpm install -g opencode-vibeguard 2>&1 | Select-Object -Last 10\n\"=== check global ===\"\nnpm list -g --depth=0 2>&1 | Select-Object -First 10\n"
 }
