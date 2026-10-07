@@ -1,0 +1,16 @@
+=== downloading RustDesk ===
+asset: rustdesk-1.5.0-x86_64.exe (24.7 MB)
+downloaded
+=== installing ===
+installer exit: 0
+=== verifying ===
+
+ProcessName    Id
+-----------    --
+RustDesk     5456
+RustDesk    10832
+RustDesk    13008
+RustDesk    14600
+installed at: C:\Program Files\RustDesk\RustDesk.exe
+
+
