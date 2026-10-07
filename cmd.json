@@ -1,6 +1,6 @@
 {
-  "id": "cmd-113",
+  "id": "cmd-114",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "$env:Path += \";C:\\Users\\E\\AppData\\Local\\hermes\\bin\"\n\"=== trying providers dict format ===\"\nhermes config set providers.zen.base_url \"https://opencode.ai/zen/v1\" 2>&1 | Select-Object -First 2\nhermes config set providers.zen.key_env \"ZEN_API_KEY\" 2>&1 | Select-Object -First 2\nhermes config set providers.zen.name \"OpenCode Zen\" 2>&1 | Select-Object -First 2\n\"=== testing ===\"\n$job = Start-Job -ScriptBlock {\n  $env:Path += \";C:\\Users\\E\\AppData\\Local\\hermes\\bin\"\n  hermes -z \"Say HI\" -m \"space-bunny-free\" --provider zen 2>&1 | Select-Object -First 10\n}\nif (Wait-Job $job -Timeout 60) {\n  Receive-Job $job | Select-Object -First 10\n} else {\n  \"TIMED OUT\"\n  Stop-Job $job\n}\nRemove-Job $job -Force\n"
+  "script": "$env:Path += \";C:\\Users\\E\\AppData\\Local\\hermes\\bin\"\n\"=== checking .env ===\"\nGet-Content \"C:\\Users\\E\\AppData\\Local\\hermes\\.env\" | ForEach-Object { if ($_ -match \"^(ZEN|OPENAI)_API_KEY=\") { $_.Substring(0, 20) + \"...\" } }\n\"=== setting key directly in provider config ===\"\n$key = (Get-Content \"C:\\Users\\E\\AppData\\Local\\hermes\\.env\" | Select-String \"ZEN_API_KEY=(.*)\").Matches.Groups[1].Value.Trim()\nhermes config set providers.zen.api_key $key 2>&1 | Select-Object -First 2\n\"=== testing ===\"\n$job = Start-Job -ScriptBlock {\n  $env:Path += \";C:\\Users\\E\\AppData\\Local\\hermes\\bin\"\n  hermes -z \"Say HI\" -m \"space-bunny-free\" --provider zen 2>&1 | Select-Object -First 10\n}\nif (Wait-Job $job -Timeout 60) {\n  Receive-Job $job | Select-Object -First 10\n} else {\n  \"TIMED OUT\"\n  Stop-Job $job\n}\nRemove-Job $job -Force\n"
 }
