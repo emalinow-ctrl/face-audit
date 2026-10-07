@@ -1,0 +1,7 @@
+You cannot call a method on a null-valued expression.
+At C:\Users\E\relay\run.ps1:2 char:1
++ "Token prefix: " + ([Environment]::GetEnvironmentVariable("GITHUB_TOK ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : InvokeMethodOnNull
+ 
