@@ -1,6 +1,6 @@
 {
-  "id": "cmd-107",
+  "id": "cmd-108",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "$env:Path += \";C:\\Users\\E\\AppData\\Local\\hermes\\bin\"\n\"=== hermes doctor model section ===\"\nhermes doctor 2>&1 | Select-String -Pattern \"model|provider|space-bunny|custom\" | Select-Object -First 8\n\"=== trying simple hermes command ===\"\nhermes --help 2>&1 | Select-Object -First 10\n"
+  "script": "$env:Path += \";C:\\Users\\E\\AppData\\Local\\hermes\\bin\"\n$job = Start-Job -ScriptBlock {\n  $env:Path += \";C:\\Users\\E\\AppData\\Local\\hermes\\bin\"\n  hermes -z \"Reply with exactly: HERMES_OK\" 2>&1 | Select-Object -First 10\n}\nif (Wait-Job $job -Timeout 90) {\n  \"Result:\"\n  Receive-Job $job\n} else {\n  \"TIMED OUT after 90s\"\n  Stop-Job $job\n}\nRemove-Job $job -Force\n"
 }
