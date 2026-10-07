@@ -1,0 +1,11 @@
+=== provider and base_url ===
+
+LineNumber Line                                    
+---------- ----                                    
+       108   provider: "custom"                    
+       112   base_url: "https://opencode.ai/zen/v1"
+=== checking for bad chars around position 102091 ===
+Total length: 128100
+Snippet: 67-2E-6A-73-6F-6E-29-3A-0D-0A-23-20-68-6F-6E-63-68-6F-3A-20-7B-7D-0D-0A-0D-0A-23-20-3D-3D
+
+
