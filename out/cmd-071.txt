@@ -1,0 +1,9 @@
+=== disk ===
+Free: 175.1 GB
+Total: 952.8 GB
+=== config ===
+
+  input_dir: /data/videos        # folder scanned recursively for videos
+  output_dir: /data/audit_out     # flagged frames + reports land here
+
+
