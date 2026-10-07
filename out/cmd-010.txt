@@ -1,0 +1,11 @@
+=== RustDesk ID ===
+id file not found yet
+=== dashboard ===
+dashboard already running on 100.107.85.14:8472
+=== poller scheduled task ===
+
+TaskName        State
+--------        -----
+faceaudit-relay Ready
+
+
