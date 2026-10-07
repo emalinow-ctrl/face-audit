@@ -1,0 +1,13 @@
+=== model section ===
+
+LineNumber
+----------
+        72
+  # Default model to use (can be overridden with --model flag)
+  # Both "default" and "model" work as the key name here.
+  default: "space-bunny-free"
+
+  # Inference provider selection:
+  #   "auto"         - Auto-detect from credentials (default)
+
+
