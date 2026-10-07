@@ -1,6 +1,6 @@
 {
-  "id": "cmd-015",
+  "id": "cmd-016",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "\"=== installing OpenCode ===\"\ntry {\n  irm https://opencode.ai/install.ps1 | iex\n  \"install script done\"\n} catch {\n  \"INSTALL FAILED: \" + $_.Exception.Message\n  exit 1\n}\nStart-Sleep -Seconds 3\n\"=== verifying ===\"\n$oc = Get-Command opencode -ErrorAction SilentlyContinue\nif ($oc) {\n  \"found at: $($oc.Source)\"\n  try { opencode --version } catch { \"version check failed\" }\n} else {\n  \"opencode not in PATH, checking common locations\"\n  Get-ChildItem \"$env:USERPROFILE\\.opencode\" -ErrorAction SilentlyContinue | Select-Object Name\n  Get-ChildItem \"$env:LOCALAPPDATA\\opencode\" -ErrorAction SilentlyContinue | Select-Object Name\n}\n"
+  "script": "\"=== installing Node.js ===\"\ntry {\n  winget install --id OpenJS.NodeJS.LTS -e --accept-source-agreements --accept-package-agreements 2>&1 | Select-Object -Last 3\n  \"winget done\"\n} catch {\n  \"WINGET FAILED: \" + $_.Exception.Message\n}\n\"=== refreshing PATH ===\"\n$env:Path = [System.Environment]::GetEnvironmentVariable(\"Path\",\"Machine\") + \";\" + [System.Environment]::GetEnvironmentVariable(\"Path\",\"User\")\n\"=== verifying node ===\"\ntry { node --version } catch { \"node still not found\" }\ntry { npm --version } catch { \"npm still not found\" }\n"
 }
