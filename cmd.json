@@ -1,6 +1,6 @@
 {
-  "id": "cmd-048",
+  "id": "cmd-049",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "\"=== auth.json (redacted) ===\"\n$auth = Get-Content \"$env:USERPROFILE\\.local\\share\\opencode\\auth.json\" | ConvertFrom-Json\n$auth.PSObject.Properties.Name\n\"=== check if token looks valid ===\"\n$zen = $auth.\"opencode\"\nif ($zen) { \"Zen auth type: \" + $zen.type }\n\"=== trying with explicit model flag ===\"\n$job = Start-Job -ScriptBlock {\n  $env:Path = [System.Environment]::GetEnvironmentVariable(\"Path\",\"Machine\") + \";\" + [System.Environment]::GetEnvironmentVariable(\"Path\",\"User\")\n  Set-Location \"$env:USERPROFILE\\Desktop\\audit2\"\n  opencode run --model \"opencode/space-bunny-free\" \"Say OK\" 2>&1 | Select-Object -First 5\n}\nif (Wait-Job $job -Timeout 30) {\n  Receive-Job $job\n} else {\n  \"TIMED OUT\"\n  Stop-Job $job\n}\nRemove-Job $job -Force\n"
+  "script": "\"=== testing Zen API connectivity ===\"\ntry {\n  $resp = Invoke-WebRequest -Uri \"https://opencode.ai/zen/v1/models\" -TimeoutSec 15 -UseBasicParsing\n  \"Status: \" + $resp.StatusCode\n  $models = ($resp.Content | ConvertFrom-Json).data\n  \"Total models: \" + $models.Count\n  \"Space bunny found: \" + ($models.id -contains \"space-bunny-free\")\n  $models | Where-Object { $_.id -like \"*space-bunny*\" } | Select-Object id | Select-Object -First 3\n} catch {\n  \"Failed: \" + $_.Exception.Message\n}\n"
 }
