@@ -8,7 +8,6 @@
 ◆ Memory Provider
   ✓ Built-in memory active (no external provider configured — this is fine)
 === trying simple hermes command ===
-
 usage: hermes [-h] [--version] [-z PROMPT] [--usage-file PATH] [-m MODEL]
               [--provider PROVIDER] [--reasoning LEVEL] [-t TOOLSETS]
               [--resume SESSION] [--no-restore-cwd] [--in DIR]
@@ -19,5 +18,6 @@ usage: hermes [-h] [--version] [-z PROMPT] [--usage-file PATH] [-m MODEL]
               <command> ...
 
 Hermes Agent - AI assistant with tool-calling capabilities
+
 
 
