@@ -1,6 +1,6 @@
 {
-  "id": "cmd-012",
+  "id": "cmd-013",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "cd \"$env:USERPROFILE\\Desktop\\audit2\"\n\"=== pull ===\"\ngit pull -q origin main 2>&1 | Select-Object -Last 2\ngit log --oneline -1\n\"=== restart dashboard ===\"\nGet-CimInstance Win32_Process -Filter \"Name='python.exe'\" | Where-Object { $_.CommandLine -like \"*status_server*\" } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force; \"stopped old\" }\nStart-Sleep -Seconds 2\nStart-Process -FilePath \".\\.venv\\Scripts\\python.exe\" -ArgumentList \"status_server.py --config tests/test_config.yaml --host 100.107.85.14 --port 8472\" -WindowStyle Hidden\nStart-Sleep -Seconds 4\ntry {\n  $r = Invoke-WebRequest -Uri \"http://100.107.85.14:8472/api/flagged\" -TimeoutSec 5 -UseBasicParsing | ConvertFrom-Json\n  \"dashboard OK \u2014 flagged: $($r.total)\"\n} catch {\n  \"FAILED: \" + $_.Exception.Message\n}\n"
+  "script": "try {\n  $r = Invoke-WebRequest -Uri \"http://100.107.85.14:8472/api/flagged\" -TimeoutSec 5 -UseBasicParsing | ConvertFrom-Json\n  \"dashboard UP \u2014 flagged: $($r.total), reviewed: $($r.reviewed)\"\n  $h = Invoke-WebRequest -Uri \"http://100.107.85.14:8472/\" -TimeoutSec 5 -UseBasicParsing\n  if ($h.Content -like \"*video-section*\") { \"HTML has collapsible sections\" } else { \"HTML MISSING new code\" }\n} catch {\n  \"DASHBOARD DOWN: \" + $_.Exception.Message\n}\n"
 }
