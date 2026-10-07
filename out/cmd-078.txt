@@ -1,0 +1,24 @@
+=== checking hermes install ===
+
+Name           
+----           
+audio_cache    
+backups        
+bin            
+bootstrap-cache
+cache          
+cron           
+hermes-agent   
+hooks          
+image_cache    
+installs       
+=== trying hermes directly ===
+Hermes Agent v0.21.5+8583.g8273265 (2026.9.24) · upstream 82732650
+Install directory: C:\Users\E\AppData\Local\hermes\hermes-agent
+Install method: git
+=== check for hermes exe ===
+               
+               
+               
+
+
