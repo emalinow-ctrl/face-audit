@@ -1,6 +1,6 @@
 {
-  "id": "cmd-014",
+  "id": "cmd-015",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "\"=== node ===\"\ntry { node --version } catch { \"node not found\" }\ntry { npm --version } catch { \"npm not found\" }\n\"=== opencode ===\"\ntry { opencode --version } catch { \"opencode not installed\" }\n\"=== existing config ===\"\nTest-Path \"$env:USERPROFILE\\.config\\opencode\\opencode.json\"\nTest-Path \"$env:APPDATA\\opencode\\opencode.json\"\n"
+  "script": "\"=== installing OpenCode ===\"\ntry {\n  irm https://opencode.ai/install.ps1 | iex\n  \"install script done\"\n} catch {\n  \"INSTALL FAILED: \" + $_.Exception.Message\n  exit 1\n}\nStart-Sleep -Seconds 3\n\"=== verifying ===\"\n$oc = Get-Command opencode -ErrorAction SilentlyContinue\nif ($oc) {\n  \"found at: $($oc.Source)\"\n  try { opencode --version } catch { \"version check failed\" }\n} else {\n  \"opencode not in PATH, checking common locations\"\n  Get-ChildItem \"$env:USERPROFILE\\.opencode\" -ErrorAction SilentlyContinue | Select-Object Name\n  Get-ChildItem \"$env:LOCALAPPDATA\\opencode\" -ErrorAction SilentlyContinue | Select-Object Name\n}\n"
 }
