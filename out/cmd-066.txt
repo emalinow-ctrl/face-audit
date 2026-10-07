@@ -1,0 +1,17 @@
+function showTab(which){
+  document.getElementById('tab-live').classList.toggle('active', which==='live');
+  document.getElementById('tab-flagged').classList.toggle('active', which==='flagged');
+  document.getElementById('page-live').classList.toggle('hidden', which!=='live');
+  document.getElementById('page-flagged').classList.toggle('hidden', which!=='flagged');
+  if(which==='flagged') loadFlagged();
+}
+/* ---------- live ---------- */
+async function tick(){
+  if(!document.getElementById('page-live').classList.contains('hidden')){
+    try{
+      const s = await (await fetch('/api/status')).json();
+      document.getElementById('err').textContent='';
+      document.getElementById('obar').style.width = s.overall_pct.toFixed(1)+'%';
+      document.getElementById('opct').textContent =
+        s.overall_pct.toFixed(1)+'% overall Aú '+s.done_videos+'/'+s.total_videos+' videos done';
+      document.getElementById('task').innerHTML = s.pipeline_active
