@@ -1,7 +1,7 @@
 === opencode tab content ===
 
-LineNumber Line                                                                                                        
----------- ----                                                                                                        
-       105   <button class="tab" id="tab-opencode" onclick="showTab('opencode')">OpenCode<span class="n hidden" id="...
+LineNumber Line                                                                                   
+---------- ----                                                                                   
+       105   <button class="tab" id="tab-opencode" onclick="showTab('opencode')">OpenCode<span ...
 
 
