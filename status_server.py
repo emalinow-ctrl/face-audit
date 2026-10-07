@@ -73,7 +73,9 @@ h2{margin:0 0 4px} .sub{color:#888;font-size:13px;margin-bottom:18px}
 #gallery{margin-top:12px}
 .video-section{margin-bottom:24px}
 .video-header{font-size:15px;font-weight:600;margin-bottom:10px;padding-bottom:6px;
-  border-bottom:1px solid #2c2c34}
+  border-bottom:1px solid #2c2c34;cursor:pointer;user-select:none}
+.video-header .arrow{display:inline-block;width:20px;color:#7a2bd8}
+.video-grid.collapsed{display:none}
 .video-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
 .thumb{position:relative;cursor:pointer;border-radius:8px;overflow:hidden;border:2px solid #2c2c34}
 .thumb img{width:100%;height:110px;object-fit:cover;display:block}
@@ -210,10 +212,15 @@ async function loadFlagged(){
     const vUnrev=frames.filter(f=>!f.verdict).length;
     const sec=document.createElement('div');
     sec.className='video-section';
-    sec.innerHTML=`<div class="video-header">${esc(video)} <span class="meta">`+
+    sec.innerHTML=`<div class="video-header"><span class="arrow">▼</span>${esc(video)} <span class="meta">`+
       `${frames.length} frames · ${vUnrev} to review</span></div>`;
     const grid=document.createElement('div');
     grid.className='video-grid';
+    const header=sec.querySelector('.video-header');
+    header.onclick=()=>{
+      const collapsed=grid.classList.toggle('collapsed');
+      header.querySelector('.arrow').textContent=collapsed?'▶':'▼';
+    };
     frames.forEach(f=>{
       const el=document.createElement('div');
       el.className='thumb'+(f.verdict==='accept'?' done-accept':f.verdict==='deny'?' done-deny':'');
