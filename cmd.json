@@ -1,6 +1,6 @@
 {
-  "id": "cmd-095",
+  "id": "cmd-096",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "$env:Path += \";C:\\Users\\E\\AppData\\Local\\hermes\\bin\"\nhermes doctor 2>&1 | Select-String \"model|provider|custom|space-bunny\" | Select-Object -First 10\n"
+  "script": "\"=== finding clean config ===\"\n$src = \"C:\\Users\\E\\AppData\\Local\\hermes\\hermes-agent\"\nGet-ChildItem $src -Filter \"config.yaml\" -Recurse 2>$null | Select-Object FullName | Select-Object -First 3\n\"=== checking example config ===\"\nGet-ChildItem $src -Filter \"*.example*\" -Recurse 2>$null | Select-Object FullName | Select-Object -First 3\n"
 }
