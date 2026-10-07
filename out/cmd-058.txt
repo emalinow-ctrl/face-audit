@@ -1,0 +1,16 @@
+True
+
+Name        
+----        
+.venv       
+testdata    
+tests       
+tools       
+__pycache__ 
+.gitignore  
+blurcheck.py
+calibrate.py
+config.yaml 
+db.py       
+
+
