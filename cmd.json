@@ -1,6 +1,6 @@
 {
-  "id": "cmd-070",
+  "id": "cmd-071",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "\"=== test videos ===\"\nGet-ChildItem \"C:\\Users\\E\\Desktop\\audit2\\testdata\\videos\" | Select-Object Name, @{N=\"SizeMB\";E={[math]::Round($_.Length/1MB,1)}}\n\"=== disk space ===\"\nGet-PSDrive C | Select-Object @{N=\"FreeGB\";E={[math]::Round($_.Free/1GB,1)}}, @{N=\"UsedGB\";E={[math]::Round($_.Used/1GB,1)}}\n\"=== output dir ===\"\n$config = Get-Content \"C:\\Users\\E\\Desktop\\audit2\\config.yaml\" | Select-String \"output_dir\" | Select-Object -First 1\n$config\n"
+  "script": "\"=== disk ===\"\n$disk = Get-WmiObject Win32_LogicalDisk -Filter \"DeviceID='C:'\"\n\"Free: \" + [math]::Round($disk.FreeSpace/1GB,1) + \" GB\"\n\"Total: \" + [math]::Round($disk.Size/1GB,1) + \" GB\"\n\"=== config ===\"\nGet-Content \"C:\\Users\\E\\Desktop\\audit2\\config.yaml\" | Select-String \"output_dir|input_dir\" | Select-Object -First 4\n"
 }
