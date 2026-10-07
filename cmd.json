@@ -1,6 +1,6 @@
 {
-  "id": "cmd-080",
+  "id": "cmd-081",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "\"=== adding to PATH ===\"\n$hermesBin = \"C:\\Users\\E\\AppData\\Local\\hermes\\bin\"\n$currentPath = [Environment]::GetEnvironmentVariable(\"Path\", \"User\")\nif ($currentPath -notlike \"*hermes*\") {\n  [Environment]::SetEnvironmentVariable(\"Path\", \"$currentPath;$hermesBin\", \"User\")\n  \"Added to PATH\"\n} else { \"Already in PATH\" }\n\"=== config location ===\"\nGet-ChildItem \"C:\\Users\\E\\AppData\\Local\\hermes\" -Filter \"config*\" | Select-Object Name, FullName | Select-Object -First 5\n\"=== checking hermes config ===\"\nhermes config list 2>&1 | Select-Object -First 10\n"
+  "script": "Get-Content \"C:\\Users\\E\\AppData\\Local\\hermes\\config.yaml\" | Select-Object -First 40\n"
 }
