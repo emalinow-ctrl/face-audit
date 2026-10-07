@@ -1,0 +1,10 @@
+=== testing Zen API connectivity ===
+Status: 200
+Total models: 88
+Space bunny found: True
+
+id              
+--              
+space-bunny-free
+
+
