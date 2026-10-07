@@ -1,6 +1,6 @@
 {
-  "id": "cmd-083",
+  "id": "cmd-084",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "(Get-Content \"C:\\Users\\E\\AppData\\Local\\hermes\\config.yaml\")[70..110] -join \"`n\"\n"
+  "script": "(Get-Content \"C:\\Users\\E\\AppData\\Local\\hermes\\config.yaml\")[110..130] -join \"`n\"\n"
 }
