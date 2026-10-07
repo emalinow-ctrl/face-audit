@@ -1,5 +1,6 @@
-hermes : The term 'hermes' is not recognized as the name of a cmdlet, function, script file, or operable program. 
-Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+hermes : The term 'hermes' is not recognized as the name of a cmdlet, function, script file, or 
+operable program. Check the spelling of the name, or if a path was included, verify that the path 
+is correct and try again.
 At C:\Users\E\relay\run.ps1:11 char:1
 + hermes config list 2>&1 | Select-Object -First 10
 + ~~~~~~
