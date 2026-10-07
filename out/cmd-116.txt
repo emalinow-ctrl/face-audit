@@ -1,0 +1,14 @@
+Created: bm_sharp_01.mp4
+Created: bm_sharp_02.mp4
+Created: bm_blur_01.mp4
+Created: bm_pixel_01.mp4
+Created: bm_mixed_01.mp4
+Created: wf_sharp_01.mp4
+Created: wf_sharp_02.mp4
+Created: wf_blur_01.mp4
+Created: wf_pixel_01.mp4
+Created: wf_mixed_01.mp4
+Created: mixed_sharp_01.mp4
+Created: mixed_censor_01.mp4
+
+Done! 12 videos in C:\Users\E\Desktop\docs\test_footage
