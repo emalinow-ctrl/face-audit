@@ -1,0 +1,15 @@
+=== shell-strategy retry ===
+=== build dcp ===
+> npm run clean && tsup && tsc --emitDeclarationOnly
+
+
+> @tarquinen/opencode-dcp@3.2.0 clean
+> rm -rf dist
+
+=== verify ===
+C:\Users\E\AppData\Roaming\npm
++-- @tarquinen/opencode-dcp@3.2.0
++-- @zenobius/opencode-skillful@1.2.5
++-- opencode-ai@1.18.35
+`-- opencode-vibeguard@0.1.0
+
