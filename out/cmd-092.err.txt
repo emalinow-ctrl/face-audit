@@ -1,26 +1,22 @@
 hermes : hermes: source-update completion failed: could not parse plugin selection: 
-C:\Users\E\AppData\Local\hermes\config.yaml; running with the previous dependencies ΓÇö run 
-`hermes update` to finish it
+C:\Users\E\AppData\Local\hermes\config.yaml; running with the previous dependencies ΓÇö run `hermes update` to finish 
+it
 At line:3 char:3
 +   hermes -p "Reply with exactly: HERMES_OK" 2>&1 | Select-Object -Fir ...
 +   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : NotSpecified: (hermes: source-...e` to finish it:String) [], Remote 
-   Exception
+    + CategoryInfo          : NotSpecified: (hermes: source-...e` to finish it:String) [], RemoteException
     + FullyQualifiedErrorId : NativeCommandError
  
-Your settings file (C:\Users\E\AppData\Local\hermes\config.yaml) has a formatting error. Hermes 
-is running on your last good settings until it is fixed, so recent changes are not applied. Open 
-it with `hermes config edit`, fix the problem, then run `hermes config check`. Details: 
-unacceptable character #x008f: special characters are not allowed in "<unicode string>", position 
-102091
-ΓÜá∩╕Å  hermes config: Your settings file (C:\Users\E\AppData\Local\hermes\config.yaml) has a 
-formatting error. Hermes is running on your last good settings until it is fixed, so recent 
-changes are not applied. Open it with `hermes config edit`, fix the problem, then run `hermes 
-config check`.
-    Details: unacceptable character #x008f: special characters are not allowed in "<unicode 
-string>", position 102091
-ΓÜá install out of sync (venv: could not parse plugin selection: 
-C:\Users\E\AppData\Local\hermes\config.yaml) ΓÇö run `hermes pm install`
+Your settings file (C:\Users\E\AppData\Local\hermes\config.yaml) has a formatting error. Hermes is running on your 
+last good settings until it is fixed, so recent changes are not applied. Open it with `hermes config edit`, fix the 
+problem, then run `hermes config check`. Details: unacceptable character #x008f: special characters are not allowed in 
+"<unicode string>", position 102091
+ΓÜá∩╕Å  hermes config: Your settings file (C:\Users\E\AppData\Local\hermes\config.yaml) has a formatting error. Hermes 
+is running on your last good settings until it is fixed, so recent changes are not applied. Open it with `hermes 
+config edit`, fix the problem, then run `hermes config check`.
+    Details: unacceptable character #x008f: special characters are not allowed in "<unicode string>", position 102091
+ΓÜá install out of sync (venv: could not parse plugin selection: C:\Users\E\AppData\Local\hermes\config.yaml) ΓÇö run 
+`hermes pm install`
 hermes: 'Reply with exactly: HERMES_OK' is not a `hermes` command.
 Run `hermes --help` to see all commands.
 hermes: 'Reply with exactly: HERMES_OK' is not a `hermes` command.
