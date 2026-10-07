@@ -1,0 +1,3 @@
+Token length: 51
+Written to .env
+OPENAI_API_KEY=oc_sk_6c72...
