@@ -1,0 +1,7 @@
+=== current provider config ===
+https://opencode.ai/zen/v1
+ZEN_API_KEY
+=== .env ===
+ZEN_API_KEY=oc_sk_d1...
+=== test ===
+OK
