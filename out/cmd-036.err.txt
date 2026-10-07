@@ -8,12 +8,13 @@ npm verbose npm  v11.17.0
 npm verbose exit 1
 npm verbose code 1
 npm error A complete log of this run can be found in: 
-C:\Users\E\AppData\Local\npm-cache\_logs\2026-10-07T04_38_49_923Z-debug-0.log
+C:\Users\E\AppData\Local\npm-cache\_logs\2026-10-07T04_39_11_862Z-debug-0.log
 node.exe : 'rm' is not recognized as an internal or external command,
 At line:1 char:1
 + & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
 + ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : NotSpecified: ('rm' is not rec...ternal command,:String) [], RemoteException
+    + CategoryInfo          : NotSpecified: ('rm' is not rec...ternal command,:String) [], Remote 
+   Exception
     + FullyQualifiedErrorId : NativeCommandError
  
 operable program or batch file.
