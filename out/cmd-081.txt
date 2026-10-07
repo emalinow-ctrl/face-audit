@@ -1,0 +1,40 @@
+# Hermes Agent CLI Configuration
+# Copy settings from this example into ~/.hermes/config.yaml, or use
+# `hermes config set <section.key> <value>` to update the active profile.
+# This file configures CLI behavior; only documented secret environment
+# variables in .env take precedence over their corresponding settings.
+
+# Schema version of this file. The installers copy it to seed config.yaml, and
+# `hermes update` uses it to know which one-time migrations the file already
+# has. Hermes manages it: do not copy it into another config.
+_config_version: 50
+
+# =============================================================================
+# Database Configuration
+# =============================================================================
+# WAL is the normal default. Hermes automatically falls back to DELETE when
+# SQLite reports that WAL is incompatible with the filesystem. Set this to
+# "delete" explicitly for deployments whose backing filesystem is not WAL
+# crash-safe, such as Linux containers bind-mounted through macOS virtiofs,
+# NFS, or SMB. Hermes will not live-downgrade a database already open in WAL.
+database:
+  journal_mode: "wal"  # Supported values: "wal", "delete"
+  # Optional WAL sizing pragmas (integers). Unset = SQLite defaults.
+  # wal_autocheckpoint: 1000     # pages between automatic checkpoints
+  # journal_size_limit: 67108864 # cap the WAL/journal file size in bytes
+  #
+  # Durability level for every state.db connection: OFF, NORMAL, FULL, EXTRA
+  # (or 0-3). Unset leaves SQLite's default, which is baked in at compile time
+  # (SQLITE_DEFAULT_WAL_SYNCHRONOUS) and therefore differs between the bundled
+  # interpreter, a distro python3 and a Homebrew one. Set it if you need to
+  # know which one you are running rather than infer it. On macOS this is a
+  # floor, not a pin: values below FULL are refused because Darwin's fsync()
+  # does not guarantee write ordering, while EXTRA is honored normally.
+  # synchronous: FULL
+
+# =============================================================================
+# Runtime Limits
+# =============================================================================
+# Long-running Hermes server processes raise their RLIMIT_NOFILE soft limit to
+# this value when the operating system permits it. The value is clamped to the
+# hard limit and never lowers an already higher soft limit. Set to 0, false, or
