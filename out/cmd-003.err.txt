@@ -1,0 +1,12 @@
+python : 2026-10-06 17:40:52,363 INFO checkpoints cleared
+At C:\Users\E\relay\run.ps1:4 char:1
++ python main.py --config tests/test_config.yaml --workers 4 --reset 2> ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (2026-10-06 17:4...kpoints cleared:String) [], Remote 
+   Exception
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+2026-10-06 17:40:52,363 INFO found 3 videos
+videos:   0%|          | 0/3 [00:00<?, ?it/s]
+videos:  33%|###3      | 1/3 [04:37<09:15, 277.86s/it]
+videos:  67%|######6   | 2/3 [05:05<02:10, 130.59s/it]

@@ -1,0 +1,149 @@
+=== pipeline start ===
+=== evaluate ===
+{
+ "videos": {
+  "club_a.mp4": {
+   "events": [
+    {
+     "actor": 0,
+     "t0": 12,
+     "t1": 25,
+     "type": "sharp",
+     "recalled": true,
+     "n_exports": 69,
+     "tracks_flagged": [
+      5,
+      8
+     ],
+     "track_consistent": true
+    },
+    {
+     "actor": 1,
+     "t0": 0,
+     "t1": 8,
+     "type": "sharp",
+     "recalled": true,
+     "n_exports": 7,
+     "tracks_flagged": [
+      2,
+      3
+     ],
+     "track_consistent": true
+    },
+    {
+     "actor": 3,
+     "t0": 30,
+     "t1": 45,
+     "type": "sharp",
+     "recalled": true,
+     "n_exports": 112,
+     "tracks_flagged": [
+      9
+     ],
+     "track_consistent": true
+    },
+    {
+     "actor": 5,
+     "t0": 0,
+     "t1": 45,
+     "type": "sharp",
+     "recalled": true,
+     "n_exports": 199,
+     "tracks_flagged": [
+      2,
+      3,
+      4,
+      5,
+      8,
+      9
+     ],
+     "track_consistent": false
+    },
+    {
+     "actor": 4,
+     "t0": 20,
+     "t1": 30,
+     "type": "weak",
+     "covered": true,
+     "exported": true,
+     "queued_for_review": true
+    }
+   ],
+   "false_positives": 0
+  },
+  "club_b.mp4": {
+   "events": [
+    {
+     "actor": 0,
+     "t0": 15,
+     "t1": 28,
+     "type": "sharp",
+     "recalled": true,
+     "n_exports": 97,
+     "tracks_flagged": [
+      1,
+      4
+     ],
+     "track_consistent": true
+    },
+    {
+     "actor": 2,
+     "t0": 0,
+     "t1": 10,
+     "type": "sharp",
+     "recalled": true,
+     "n_exports": 73,
+     "tracks_flagged": [
+      1,
+      2
+     ],
+     "track_consistent": true
+    },
+    {
+     "actor": 3,
+     "t0": 35,
+     "t1": 45,
+     "type": "sharp",
+     "recalled": true,
+     "n_exports": 72,
+     "tracks_flagged": [
+      1,
+      6
+     ],
+     "track_consistent": true
+    },
+    {
+     "actor": 5,
+     "t0": 22,
+     "t1": 32,
+     "type": "sharp",
+     "recalled": true,
+     "n_exports": 73,
+     "tracks_flagged": [
+      1,
+      4
+     ],
+     "track_consistent": true
+    },
+    {
+     "actor": 4,
+     "t0": 0,
+     "t1": 45,
+     "type": "weak",
+     "covered": true,
+     "exported": true,
+     "queued_for_review": true
+    }
+   ],
+   "false_positives": 0
+  }
+ },
+ "summary": {
+  "event_recall": "8/8",
+  "event_recall_rate": 1.0,
+  "weak_coverage": "2/2",
+  "weak_coverage_rate": 1.0,
+  "false_positive_frames": 0,
+  "review_items": 1185
+ }
+}
