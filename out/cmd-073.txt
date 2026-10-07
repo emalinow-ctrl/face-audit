@@ -1,1 +1,22 @@
 === _is_borderline ===
+    """True when a blur metric sits within `margin` of its threshold (uncertain call)."""
+    et = bc_cfg["edge_threshold"]
+    if abs(metrics["edge_den"] - et) / max(et, 1e-9) < margin:
+        return True
+    pft, plt = bc_cfg["pixel_flat_threshold"], bc_cfg["pixel_lap_threshold"]
+    if (abs(metrics["flat_frac"] - pft) / max(pft, 1e-9) < margin
+            and metrics["lap_var"] > plt * 0.5):
+        return True
+    return False
+
+
+def _queue_review(review_db: ReviewDB, crops_dir: Path, thumb_cache: dict,
+                  video_stem: str, video_name: str, frame, idx: int, fps: float,
+                  w: int, h: int, bbox: tuple, reason: str,
+                  pipeline_blur: str | None, metrics: dict | None,
+                  det_score: float, fc: float, feats: dict | None,
+                  track_id: int | None, n_queued: list) -> None:
+    """Persist a crop + frame thumbnail and enqueue a human review item."""
+    x1, y1, x2, y2 = bbox
+    n_queued[0] += 1
+    crop_path = crops_dir / "crops" / f"{video_stem}_f{idx:08d}_q{n_queued[0]:03d}.jpg"
