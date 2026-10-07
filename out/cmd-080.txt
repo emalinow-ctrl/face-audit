@@ -1,0 +1,10 @@
+=== adding to PATH ===
+Already in PATH
+=== config location ===
+
+Name        FullName                                   
+----        --------                                   
+config.yaml C:\Users\E\AppData\Local\hermes\config.yaml
+=== checking hermes config ===
+
+
