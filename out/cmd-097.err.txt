@@ -1,0 +1,35 @@
+At C:\Users\E\relay\run.ps1:6 char:10
++ python3 <<'PYEOF'
++          ~
+Missing file specification after redirection operator.
+At C:\Users\E\relay\run.ps1:6 char:9
++ python3 <<'PYEOF'
++         ~
+The '<' operator is reserved for future use.
+At C:\Users\E\relay\run.ps1:6 char:10
++ python3 <<'PYEOF'
++          ~
+The '<' operator is reserved for future use.
+At C:\Users\E\relay\run.ps1:9 char:14
++ text = open(p, encoding='utf-8').read()
++              ~
+Missing argument in parameter list.
+At C:\Users\E\relay\run.ps1:13 char:42
++ text = re.sub(r'(?m)^  provider: "nous"$', '  provider: "custom"', te ...
++                                          ~
+Missing argument in parameter list.
+At C:\Users\E\relay\run.ps1:15 char:7
++ open(p, 'w', encoding='utf-8').write(text)
++       ~
+Missing argument in parameter list.
+At C:\Users\E\relay\run.ps1:15 char:38
++ open(p, 'w', encoding='utf-8').write(text)
++                                      ~
+Missing ')' in method call.
+At C:\Users\E\relay\run.ps1:15 char:42
++ open(p, 'w', encoding='utf-8').write(text)
++                                          ~
+Unexpected token ')' in expression or statement.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : MissingFileSpecification
+ 
