@@ -1,0 +1,26 @@
+=== hermes doctor ===
+
+┌─────────────────────────────────────────────────────────┐
+│                 🩺 Hermes Doctor                        │
+└─────────────────────────────────────────────────────────┘
+
+◆ Security Advisories
+  ✓ No active security advisories
+
+◆ MCP Server Security
+  ✓ No suspicious MCP stdio commands
+
+◆ Python Environment
+  ✓ Python 3.14.7
+  ✓ SQLite 3.53.1
+    → SQLite source id: 2026-05-05 10:34:17 c88b22011a54b4f6fbd149e9f8e4…
+    → state.db: WAL journal mode (512.0 KB)
+    → cron/executions.db: WAL journal mode (24.0 KB)
+    → projects.db: WAL journal mode (44.0 KB)
+  ✓ Runtime venv staged (C:\Users\E\AppData\Local\hermes\installs\a339f2f7fb889669\environments\735c98a741eb4a78b4a67898525f9851\venv) (active in this process)
+
+◆ SSL / CA Certificates
+  ✓ TLS platform trust store configured; default SSL context available
+
+◆ Required Packages
+  ✓ OpenAI SDK

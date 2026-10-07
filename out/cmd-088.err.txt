@@ -1,0 +1,19 @@
+hermes : hermes: source-update completion failed: could not parse plugin selection: 
+C:\Users\E\AppData\Local\hermes\config.yaml; running with the previous dependencies — run `hermes update` to finish 
+it
+At C:\Users\E\relay\run.ps1:3 char:1
++ hermes doctor 2>&1 | Select-Object -First 30
++ ~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (hermes: source-...e` to finish it:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Your settings file (C:\Users\E\AppData\Local\hermes\config.yaml) has a formatting error. Hermes is running on your 
+last good settings until it is fixed, so recent changes are not applied. Open it with `hermes config edit`, fix the 
+problem, then run `hermes config check`. Details: unacceptable character #x008f: special characters are not allowed in 
+"<unicode string>", position 102091
+⚠️  hermes config: Your settings file (C:\Users\E\AppData\Local\hermes\config.yaml) has a formatting error. Hermes 
+is running on your last good settings until it is fixed, so recent changes are not applied. Open it with `hermes 
+config edit`, fix the problem, then run `hermes config check`.
+    Details: unacceptable character #x008f: special characters are not allowed in "<unicode string>", position 102091
+⚠ install out of sync (venv: could not parse plugin selection: C:\Users\E\AppData\Local\hermes\config.yaml) — run 
+`hermes pm install`
