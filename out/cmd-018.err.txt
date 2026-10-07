@@ -1,0 +1,18 @@
+opencode.exe : [91m[1mError: [0mUnexpected error
+At C:\Users\E\AppData\Roaming\npm\opencode.ps1:14 char:3
++   & "$basedir/node_modules/opencode-ai/bin/opencode.exe"   $args
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([91m[1mError: [0mUnexpected error:String) [], Rem    
+oteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Database is not empty and has no session table
+opencode.exe : [91m[1mError: [0mUnexpected error
+At C:\Users\E\AppData\Roaming\npm\opencode.ps1:14 char:3
++   & "$basedir/node_modules/opencode-ai/bin/opencode.exe"   $args
++   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ([91m[1mError: [0mUnexpected error:String) [], Rem    
+oteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Database is not empty and has no session table

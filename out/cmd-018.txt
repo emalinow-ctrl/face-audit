@@ -1,0 +1,2 @@
+=== checking opencode auth status ===
+=== checking available models ===
