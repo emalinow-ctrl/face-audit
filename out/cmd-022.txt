@@ -1,0 +1,4 @@
+config written: {
+    "model":  "opencode/space-bunny-free"
+}
+=== testing ===
