@@ -1,6 +1,6 @@
 {
-  "id": "cmd-024",
+  "id": "cmd-025",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "\"=== RustDesk status ===\"\nGet-Process rustdesk -ErrorAction SilentlyContinue | Select-Object Id, ProcessName | Select-Object -First 3\n\"=== ID file ===\"\n$idPaths = @(\n  \"$env:APPDATA\\RustDesk\\config\\id.txt\",\n  \"$env:USERPROFILE\\.config\\RustDesk\\id.txt\"\n)\nforeach ($p in $idPaths) {\n  if (Test-Path $p) { \"ID at $p : \" + (Get-Content $p).Trim() }\n}\n\"=== trying to get ID via CLI ===\"\n$exe = \"${env:ProgramFiles}\\RustDesk\\RustDesk.exe\"\nif (Test-Path $exe) {\n  try { & $exe --get-id 2>&1 | Select-Object -First 3 } catch { \"CLI failed\" }\n}\n"
+  "script": "$exe = \"${env:ProgramFiles}\\RustDesk\\RustDesk.exe\"\n\"=== setting permanent password ===\"\ntry {\n  & $exe --set-password \"FaceAudit2026!\" 2>&1 | Select-Object -First 3\n  \"password set\"\n} catch {\n  \"CLI failed: \" + $_.Exception.Message\n}\n"
 }
