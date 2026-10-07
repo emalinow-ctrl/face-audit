@@ -1,6 +1,6 @@
 {
-  "id": "cmd-094",
+  "id": "cmd-095",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "$env:Path += \";C:\\Users\\E\\AppData\\Local\\hermes\\bin\"\n\"=== resetting config via hermes ===\"\n# First, let hermes regenerate a clean config\nhermes config reset 2>&1 | Select-Object -First 5\n\"=== setting model config ===\"\nhermes config set model.default \"space-bunny-free\" 2>&1 | Select-Object -First 3\nhermes config set model.provider \"custom\" 2>&1 | Select-Object -First 3\nhermes config set model.base_url \"https://opencode.ai/zen/v1\" 2>&1 | Select-Object -First 3\n\"=== verifying ===\"\nhermes config get model.default 2>&1 | Select-Object -First 2\nhermes config get model.provider 2>&1 | Select-Object -First 2\n"
+  "script": "$env:Path += \";C:\\Users\\E\\AppData\\Local\\hermes\\bin\"\nhermes doctor 2>&1 | Select-String \"model|provider|custom|space-bunny\" | Select-Object -First 10\n"
 }
