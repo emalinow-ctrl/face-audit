@@ -1,0 +1,7 @@
+GITHUB_TOKEN set
+opencode.json written
+{
+    "plugin":  [
+                   "opencode-vibeguard",
+                   "opencode-shell-strategy",
+                   "@tarquinen/opencode-dcp",
