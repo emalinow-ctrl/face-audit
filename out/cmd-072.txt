@@ -1,0 +1,26 @@
+=== main.py size and structure ===
+Lines: 383
+=== functions ===
+
+Line                                                                                
+----                                                                                
+def _get_detector(det_cfg: dict, learned_params: str | None = None) -> FaceDetector:
+def _worker_init(det_cfg: dict, learned_params: str | None = None) -> None:         
+def _is_borderline(metrics: dict, bc_cfg: dict, margin: float) -> bool:             
+def _queue_review(review_db: ReviewDB, crops_dir: Path, thumb_cache: dict,          
+def iter_videos(input_dir: Path, extensions: list[str]) -> list[Path]:              
+def _write_status(output_dir: str, video_stem: str, payload: dict) -> None:         
+def _process_video(video: str, cfg: dict, db_path: str, output_dir: str) -> dict:   
+def _write_csv(rows: list[dict], out_path: Path) -> None:                           
+def run(                                                                            
+=== threshold usage ===
+            det_thresh=det_cfg["det_thresh"],                                       
+    et = bc_cfg["edge_threshold"]                                                   
+    pft, plt = bc_cfg["pixel_flat_threshold"], bc_cfg["pixel_lap_threshold"]        
+        det_score=det_score, face_confidence=fc,                                    
+    review_thresh = float(rq_cfg.get("face_confidence_threshold", 0.80))            
+                    fc = f["face_confidence"]                                       
+                                det["det"]["face_confidence"],                      
+                                          m, d["score"], d["face_confidence"],      
+
+
