@@ -1,6 +1,6 @@
 {
-  "id": "cmd-101",
+  "id": "cmd-102",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "$auth = Get-Content \"$env:USERPROFILE\\.local\\share\\opencode\\auth.json\" | ConvertFrom-Json\n$token = $auth.opencode.key\n\"Token length: $($token.Length)\"\n$envPath = \"C:\\Users\\E\\AppData\\Local\\hermes\\.env\"\n\"OPENAI_API_KEY=$token\" | Out-File -FilePath $envPath -Encoding utf8\n\"Written to .env\"\nGet-Content $envPath | ForEach-Object { if ($_ -match \"^OPENAI_API_KEY=\") { \"OPENAI_API_KEY=\" + $_.Substring(15, 10) + \"...\" } }\n"
+  "script": "$env:Path += \";C:\\Users\\E\\AppData\\Local\\hermes\\bin\"\n$job = Start-Job -ScriptBlock {\n  $env:Path += \";C:\\Users\\E\\AppData\\Local\\hermes\\bin\"\n  hermes -p \"Reply with exactly: HERMES_OK\" 2>&1 | Select-Object -First 5\n}\nif (Wait-Job $job -Timeout 90) {\n  \"Result:\"\n  Receive-Job $job\n} else {\n  \"TIMED OUT after 90s\"\n  Stop-Job $job\n}\nRemove-Job $job -Force\n"
 }
