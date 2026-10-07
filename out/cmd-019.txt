@@ -1,0 +1,8 @@
+=== opencode config dir ===
+
+Name        
+----        
+service.json
+=== trying simple run ===
+
+
