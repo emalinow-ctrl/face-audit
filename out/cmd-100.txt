@@ -1,0 +1,3 @@
+=== direct Zen API test ===
+Token length: 0
+Models endpoint: 200 OK
