@@ -1,0 +1,4 @@
+Result:
+OpenAI API rejected your API key, so the model can't be reached. Update it in Settings ΓåÆ Providers, or run `hermes setup` in a terminal.
+
+Provider said: HTTP 401: Incorrect API key provided: oc_sk_d1***************************************2_j3. You can find your API key at https://platform.openai.com/account/api-keys.
