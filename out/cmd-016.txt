@@ -1,0 +1,9 @@
+=== installing Node.js ===
+Successfully verified installer hash
+Starting package install...
+Successfully installed
+winget done
+=== refreshing PATH ===
+=== verifying node ===
+v24.19.0
+11.17.0
