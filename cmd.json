@@ -1,6 +1,6 @@
 {
-  "id": "cmd-076",
+  "id": "cmd-077",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "Get-Content \"C:\\Users\\E\\Desktop\\audit2\\blurcheck.py\" | Select-Object -First 100\n"
+  "script": "\"=== installing Hermes Agent via GitHub ===\"\ntry {\n  irm https://raw.githubusercontent.com/NousResearch/hermes-agent/main/scripts/install.ps1 -OutFile $env:TEMP\\hermes-install.ps1\n  \"Downloaded installer\"\n  & $env:TEMP\\hermes-install.ps1 2>&1 | Select-Object -Last 10\n} catch {\n  \"Install failed: \" + $_.Exception.Message\n}\n"
 }
