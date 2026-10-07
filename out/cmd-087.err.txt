@@ -1,0 +1,16 @@
+Get-Content : Cannot find path 'C:\Users\E\AppData\Local\Temp\zen_token.txt' because it does not exist.
+At C:\Users\E\relay\run.ps1:2 char:10
++ $token = Get-Content "$env:TEMP\zen_token.txt" -Raw
++          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (C:\Users\E\AppD...p\zen_token.txt:String) [Get-Content], ItemNotFoundEx 
+   ception
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.GetContentCommand
+ 
+Remove-Item : Cannot find path 'C:\Users\E\AppData\Local\Temp\zen_token.txt' because it does not exist.
+At C:\Users\E\relay\run.ps1:27 char:1
++ Remove-Item "$env:TEMP\zen_token.txt" -Force
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (C:\Users\E\AppD...p\zen_token.txt:String) [Remove-Item], ItemNotFoundEx 
+   ception
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.RemoveItemCommand
+ 
