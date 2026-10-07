@@ -1,0 +1,5 @@
+=== direct Zen API test ===
+Token length: 51
+Token prefix: oc_sk_6c72...
+Failed: The remote server returned an error: (403) Forbidden.
+Status: 403
