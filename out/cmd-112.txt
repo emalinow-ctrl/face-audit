@@ -1,1 +1,7 @@
 === current model config ===
+custom:zen/space-bunny-free
+=== testing with default ===
+Output length: 3
+Model 'custom:zen/space-bunny-free' isn't available on Nous Portal. Pick a different model with /model (or `hermes model` in a terminal).
+
+Provider said: HTTP 404: Model 'custom:zen/space-bunny-free' not found. The requested model does not exist in our configuration or OpenRouter catalog.
