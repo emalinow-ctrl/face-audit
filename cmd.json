@@ -1,6 +1,6 @@
 {
-  "id": "cmd-034",
+  "id": "cmd-035",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "$env:Path = [System.Environment]::GetEnvironmentVariable(\"Path\",\"Machine\") + \";\" + [System.Environment]::GetEnvironmentVariable(\"Path\",\"User\")\n\"=== installing remaining plugins globally ===\"\nnpm install -g opencode-shell-strategy @tarquinen/opencode-dcp @zenobius/opencode-skillful 2>&1 | Select-Object -Last 5\n\"=== building dcp ===\"\n$dcpPath = \"C:\\Users\\E\\AppData\\Roaming\\npm\\node_modules\\@tarquinen\\opencode-dcp\"\nif (Test-Path $dcpPath) {\n  cd $dcpPath\n  npm run build 2>&1 | Select-Object -Last 5\n  \"dcp build done\"\n} else {\n  \"dcp path not found: $dcpPath\"\n}\n\"=== verify all ===\"\nnpm list -g --depth=0 2>&1 | Select-Object -First 15\n"
+  "script": "$env:Path = [System.Environment]::GetEnvironmentVariable(\"Path\",\"Machine\") + \";\" + [System.Environment]::GetEnvironmentVariable(\"Path\",\"User\")\n\"=== installing shell-strategy ===\"\nnpm install -g opencode-shell-strategy 2>&1 | Select-Object -Last 5\n\"=== installing skillful ===\"\nnpm install -g @zenobius/opencode-skillful 2>&1 | Select-Object -Last 5\n\"=== installing dcp ===\"\nnpm install -g @tarquinen/opencode-dcp 2>&1 | Select-Object -Last 5\n\"=== verify ===\"\nnpm list -g --depth=0 2>&1\n"
 }
