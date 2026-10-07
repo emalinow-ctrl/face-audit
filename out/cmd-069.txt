@@ -1,0 +1,11 @@
+=== showTab ===
+
+Line                                                                                     
+----                                                                                     
+  document.getElementById('tab-opencode').classList.toggle('active', which==='opencode');
+=== loadOpencode ===
+                                                                                         
+=== page-opencode div ===
+                                                                                         
+
+
