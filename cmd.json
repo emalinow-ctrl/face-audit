@@ -1,6 +1,6 @@
 {
-  "id": "cmd-062",
+  "id": "cmd-063",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "\"=== opencode functions ===\"\nSelect-String -Path \"C:\\Users\\E\\Desktop\\audit2\\status_server.py\" -Pattern \"def _opencode_status|def _save_opencode_status\" | Select-Object LineNumber\n\"=== API endpoints ===\"\nSelect-String -Path \"C:\\Users\\E\\Desktop\\audit2\\status_server.py\" -Pattern '/api/opencode' | Select-Object LineNumber | Select-Object -First 5\n\"=== tab button ===\"\nSelect-String -Path \"C:\\Users\\E\\Desktop\\audit2\\status_server.py\" -Pattern 'tab-opencode' | Select-Object LineNumber\n"
+  "script": "\"=== opencode tab content ===\"\nSelect-String -Path \"C:\\Users\\E\\Desktop\\audit2\\status_server.py\" -Pattern \"showTab\\('opencode'\\)|id=.oc-\" | Select-Object LineNumber, Line | Select-Object -First 5\n"
 }
