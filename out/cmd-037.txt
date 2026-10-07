@@ -1,7 +1,9 @@
 === cloning shell-strategy ===
+already cloned
 === updating opencode.json to add instructions ===
 opencode.json updated with instructions
 === cloning superpowers ===
+already cloned
 === verify ===
 
 Name             
