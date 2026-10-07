@@ -1,0 +1,8 @@
+=== installing remaining plugins globally ===
+=== building dcp ===
+dcp path not found: C:\Users\E\AppData\Roaming\npm\node_modules\@tarquinen\opencode-dcp
+=== verify all ===
+C:\Users\E\AppData\Roaming\npm
++-- opencode-ai@1.18.35
+`-- opencode-vibeguard@0.1.0
+
