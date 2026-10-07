@@ -1,0 +1,13 @@
+=== opencode functions ===
+
+LineNumber
+----------
+       413
+       423
+=== API endpoints ===
+       580
+       586
+=== tab button ===
+       105
+
+
