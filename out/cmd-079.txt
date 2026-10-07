@@ -1,0 +1,13 @@
+
+Name          
+----          
+hermes-acp.cmd
+hermes-acp.exe
+hermes.cmd    
+hermes.exe    
+---
+Hermes Agent v0.21.5+8583.g8273265 (2026.9.24) · upstream 82732650
+Install directory: C:\Users\E\AppData\Local\hermes\hermes-agent
+Install method: git
+
+
