@@ -1,6 +1,6 @@
 {
-  "id": "cmd-060",
+  "id": "cmd-061",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "Select-String -Path \"C:\\Users\\E\\Desktop\\audit2\\status_server.py\" -Pattern 'api/verdict' | Select-Object LineNumber, Line | Select-Object -First 3\n"
+  "script": "Get-Content \"C:\\Users\\E\\Desktop\\audit2\\status_server.py\" | Select-Object -Skip 588 -First 15\n"
 }
