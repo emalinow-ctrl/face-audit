@@ -1,0 +1,21 @@
+  # api_key: "your-key-here"  # Uncomment to set here instead of .env
+  base_url: "https://inference-api.nousresearch.com/v1"
+
+  # Stream API responses from the provider (default: true). The agent core
+  # prefers streaming for every turn ƒ?" subagents included ƒ?" for liveness
+  # health-checking. Set false to force non-streaming requests for the whole
+  # session (persists across mid-session model switches). Escape hatch for
+  # self-hosted OpenAI-compatible servers whose streaming tool-call path is
+  # broken (e.g. vLLM with --tool-call-parser qwen3_xml + a reasoning parser
+  # can leak tool calls into plain text instead of returning tool_calls ƒ?"
+  # #72901). Orthogonal to display.streaming, which controls token rendering
+  # only.
+  # streaming: true
+
+  # Azure Foundry keyless auth example:
+  # provider: "azure-foundry"
+  # base_url: "https://<resource>.openai.azure.com/openai/v1"
+  # auth_mode: "entra_id"      # DefaultAzureCredential: az login, managed identity, workload identity, etc.
+  # default: "gpt-4o"          # Deployment/model name
+  # entra:
+  #   scope: "https://ai.azure.com/.default"  # Optional; this is the default.
