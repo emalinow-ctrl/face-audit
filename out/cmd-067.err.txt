@@ -1,0 +1,11 @@
+python : Traceback (most recent call last):
+At C:\Users\E\relay\run.ps1:4 char:1
++ python "$env:TEMP\frontend_patch.py" 2>&1
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Traceback (most recent call last)::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  File "C:\Users\E\AppData\Local\Temp\frontend_patch.py", line 25, in <module>
+    assert old_showtab in text, "showTab not found"
+           ^^^^^^^^^^^^^^^^^^^
+AssertionError: showTab not found
