@@ -1,0 +1,19 @@
+npm error 404  The requested resource 'opencode-shell-strategy@*' could not be found or you do 
+not have permission to access it.
+npm error 404
+npm error 404 Note that you can also install from a
+npm error 404 tarball, folder, http url, or git url.
+npm error A complete log of this run can be found in: 
+C:\Users\E\AppData\Local\npm-cache\_logs\2026-10-07T04_24_43_978Z-debug-0.log
+cd : Cannot find path 'C:\Users\E\.config\opencode\node_modules\@tarquinen\opencode-dcp' because itit does not exist.AtAt C:\Users\E\relay\run.ps1:7 char:1+ + cd "$configDir\node_modules\@tarquinen\opencode-dcp"+ + ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~      + CategoryInfo          : ObjectNotFound: (C:\Users\E\.con...en\opencode-dcp:String) [Set-Loc 
+   ation], ItemNotFoundException      + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.SetLocationCommand  npm error errno -4058
+npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open 
+'C:\Users\E\.config\opencode\package.json'
+npm error enoent This is related to npm not being able to find a file.
+npm error enoent
+npm error A complete log of this run can be found in: 
+C:\Users\E\AppData\Local\npm-cache\_logs\2026-10-07T04_24_51_042Z-debug-0.log
+Get-ChildItem : Cannot find path 'C:\Users\E\.config\opencode\node_modules' because it does not exisexisAt CAt C:\Users\E\relay\run.ps1:10 char+ Ge+ Get-ChildItem "$configDir\node_modules" | Select-Object Name | Select .+ ~~+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~        + CategoryInfo          : ObjectNotFound: (C:\Users\E\.config\opencode\node_modules:String) [ 
+   Get-ChildItem], ItemNotFoundExcepti        + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.GetChildItemComma 
+
+ 
