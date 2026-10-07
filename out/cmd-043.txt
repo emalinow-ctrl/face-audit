@@ -1,0 +1,3 @@
+vibeguard.config.json written to C:\Users\E\.config\opencode
+Enabled: True
+Regex patterns: 9
