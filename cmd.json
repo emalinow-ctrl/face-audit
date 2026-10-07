@@ -1,6 +1,6 @@
 {
-  "id": "cmd-068",
+  "id": "cmd-069",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "(Get-Content \"C:\\Users\\E\\Desktop\\audit2\\status_server.py\")[144..152] -join \"`n\"\n"
+  "script": "\"=== showTab ===\"\nSelect-String -Path \"C:\\Users\\E\\Desktop\\audit2\\status_server.py\" -Pattern \"tab-opencode.*classList\" | Select-Object Line | Select-Object -First 2\n\"=== loadOpencode ===\"\nSelect-String -Path \"C:\\Users\\E\\Desktop\\audit2\\status_server.py\" -Pattern \"function loadOpencode\" | Select-Object LineNumber\n\"=== page-opencode div ===\"\nSelect-String -Path \"C:\\Users\\E\\Desktop\\audit2\\status_server.py\" -Pattern 'id=\"page-opencode\"' | Select-Object LineNumber\n"
 }
