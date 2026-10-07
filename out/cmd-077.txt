@@ -1,0 +1,30 @@
+=== installing Hermes Agent via GitHub ===
+Downloaded installer
+
++---------------------------------------------------------+
+|             * Hermes Agent Installer                    |
++---------------------------------------------------------+
+|  An open source AI agent by Nous Research.              |
++---------------------------------------------------------+
+
+[OK] prerequisites ok (git)
+-> Updating C:\Users\E\AppData\Local\hermes\hermes-agent (main)
+-> Fetching origin/main
+-> Checking out main
+Your branch is up to date with 'origin/main'.
+-> Fast-forwarding to origin/main
+Already up to date.
+[OK] bootstrap Python ready; PM prepares the dependency environment
+-> Installing dependencies (hash-verified via uv.lock)
+✓ ffmpeg
+✓ node
+✓ npm
+✓ python
+✓ ripgrep
+✓ venv
+✓ agent-browser
+✓ cua-driver
+[OK] dependencies installed
+[OK] config prepared in C:\Users\E\AppData\Local\hermes
+-> Building the hermes command and apps
+[X] app products or command publication failed (exit 1)

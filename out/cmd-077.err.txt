@@ -1,0 +1,11 @@
+    )
+  File "C:\Users\E\AppData\Local\hermes\hermes-agent\hermes_cli\source_completion.py", line 63, in 
+complete_source_checkout
+    raise RuntimeError(
+    ...<2 lines>...
+    )
+RuntimeError: an update is still running (✗ Another Hermes update is already running (started 4m 12s ago, process 
+9884).
+  Running two at once would corrupt the install. Wait for it to finish
+  (watch `hermes logs`), or close the Desktop/dashboard window that
+  started it, then run `hermes update` again.); wait for it to exit, then relaunch Hermes
