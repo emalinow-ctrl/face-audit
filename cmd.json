@@ -1,6 +1,6 @@
 {
-  "id": "cmd-110",
+  "id": "cmd-111",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "$env:Path += \";C:\\Users\\E\\AppData\\Local\\hermes\\bin\"\n$job = Start-Job -ScriptBlock {\n  $env:Path += \";C:\\Users\\E\\AppData\\Local\\hermes\\bin\"\n  hermes -z \"Reply with exactly: HERMES_OK\" 2>&1 | Select-Object -First 10\n}\nif (Wait-Job $job -Timeout 90) {\n  \"Result:\"\n  Receive-Job $job\n} else {\n  \"TIMED OUT after 90s\"\n  Stop-Job $job\n}\nRemove-Job $job -Force\n"
+  "script": "$env:Path += \";C:\\Users\\E\\AppData\\Local\\hermes\\bin\"\n$job = Start-Job -ScriptBlock {\n  $env:Path += \";C:\\Users\\E\\AppData\\Local\\hermes\\bin\"\n  hermes -z \"Reply with exactly: HERMES_OK\" --provider zen -m \"space-bunny-free\" 2>&1 | Select-Object -First 10\n}\nif (Wait-Job $job -Timeout 90) {\n  \"Result:\"\n  Receive-Job $job\n} else {\n  \"TIMED OUT after 90s\"\n  Stop-Job $job\n}\nRemove-Job $job -Force\n"
 }
