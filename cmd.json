@@ -1,6 +1,6 @@
 {
-  "id": "cmd-091",
+  "id": "cmd-092",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "\"=== provider and base_url ===\"\nSelect-String -Path \"C:\\Users\\E\\AppData\\Local\\hermes\\config.yaml\" -Pattern 'provider: \"custom\"|base_url: \"https://opencode' | Select-Object LineNumber, Line\n\"=== checking for bad chars around position 102091 ===\"\n$text = Get-Content \"C:\\Users\\E\\AppData\\Local\\hermes\\config.yaml\" -Raw\n\"Total length: $($text.Length)\"\nif ($text.Length -gt 102091) {\n  $snippet = $text.Substring(102080, 30)\n  \"Snippet: \" + [BitConverter]::ToString([Text.Encoding]::UTF8.GetBytes($snippet))\n}\n"
+  "script": "$env:Path += \";C:\\Users\\E\\AppData\\Local\\hermes\\bin\"\n\"=== testing Hermes with Space Bunny ===\"\n$job = Start-Job -ScriptBlock {\n  $env:Path += \";C:\\Users\\E\\AppData\\Local\\hermes\\bin\"\n  hermes -p \"Reply with exactly: HERMES_OK\" 2>&1 | Select-Object -First 10\n}\nif (Wait-Job $job -Timeout 60) {\n  Receive-Job $job\n} else {\n  \"TIMED OUT after 60s\"\n  Stop-Job $job\n}\nRemove-Job $job -Force\n"
 }
