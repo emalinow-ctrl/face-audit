@@ -1,0 +1,12 @@
+
+  ✓ API key or custom endpoint configured
+  ⚠ Could not validate model/provider config (unacceptable character #x008f: special characters 
+are not allowed
+◆ xAI Model Retirement (May 15, 2026)
+  ✓ No retired xAI models in config
+◆ Auth Providers
+    → No xAI OAuth credentials stored. Select xAI Grok OAuth (SuperGrok / Premium+) in `hermes 
+model◆ Memory Provider
+  ✓ Built-in memory active (no external provider configured — this is fine)
+
+
