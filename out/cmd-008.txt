@@ -1,0 +1,5 @@
+=== relay alive ===
+18:36:16
+=== dashboard ===
+tailscale ip: 100.107.85.14
+dashboard already running

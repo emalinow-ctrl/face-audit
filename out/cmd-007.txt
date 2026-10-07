@@ -1,0 +1,12 @@
+=== pull latest code ===
+4e0cd4b live dashboard: pipeline writes status/*.json per checkpoint; new status_server.py (stdlib-only, Tailscale-friendly)
+=== kill any stray pipeline workers ===
+no strays
+=== dashboard ===
+binding to: 100.107.85.14
+dashboard started OK on 100.107.85.14:8472
+=== checkpoint state ===
+checkpoint rows: 3
+  club_a.mp4 1080 done
+  club_b.mp4 1080 done
+  vid49.mp4 24480 in_progress
