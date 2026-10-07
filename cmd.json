@@ -1,6 +1,6 @@
 {
-  "id": "cmd-050",
+  "id": "cmd-051",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "\"=== direct Zen API test ===\"\n$auth = Get-Content \"$env:USERPROFILE\\.local\\share\\opencode\\auth.json\" | ConvertFrom-Json\n$token = $auth.opencode.key\n\"Token length: \" + $token.Length\n\"Token prefix: \" + $token.Substring(0, 10) + \"...\"\ntry {\n  $headers = @{ \"Authorization\" = \"Bearer $token\"; \"Content-Type\" = \"application/json\" }\n  $body = @{\n    model = \"space-bunny-free\"\n    messages = @(@{ role = \"user\"; content = \"Say OK\" })\n    max_tokens = 10\n  } | ConvertTo-Json -Depth 5\n  $resp = Invoke-WebRequest -Uri \"https://opencode.ai/zen/v1/chat/completions\" -Method Post -Headers $headers -Body $body -TimeoutSec 30 -UseBasicParsing\n  \"Status: \" + $resp.StatusCode\n  ($resp.Content | ConvertFrom-Json).choices[0].message.content\n} catch {\n  \"Failed: \" + $_.Exception.Message\n  if ($_.Exception.Response) {\n    \"Status: \" + [int]$_.Exception.Response.StatusCode\n  }\n}\n"
+  "script": "\"=== status_server.py structure ===\"\nGet-Content \"$env:USERPROFILE\\Desktop\\audit2\\status_server.py\" | Select-Object -First 80\n"
 }
