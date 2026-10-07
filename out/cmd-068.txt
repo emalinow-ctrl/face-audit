@@ -1,0 +1,9 @@
+    <div class="kv">
+      <div><div class="v" id="oc-phase">-</div><div class="k">Phase</div></div>
+      <div><div class="v" id="oc-task">-</div><div class="k">Current Task</div></div>
+      <div><div class="v" id="oc-elapsed">-</div><div class="k">Elapsed</div></div>
+      <div><div class="v" id="oc-updated">-</div><div class="k">Last Update</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="name">Recent Log</div>
