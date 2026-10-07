@@ -1,0 +1,7 @@
+At C:\Users\E\relay\run.ps1:6 char:93
++ ... nfig\opencode\opencode.json" -ErrorAction SilentlyContinue || echo "n ...
++                                                                ~~
+The token '||' is not a valid statement separator in this version.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : InvalidEndOfLine
+ 
