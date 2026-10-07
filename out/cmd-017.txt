@@ -1,0 +1,4 @@
+=== installing OpenCode via npm ===
+npm install done
+=== verifying ===
+1.18.35
