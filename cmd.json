@@ -1,6 +1,6 @@
 {
-  "id": "cmd-073",
+  "id": "cmd-074",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "\"=== _is_borderline ===\"\n$start = (Select-String -Path \"C:\\Users\\E\\Desktop\\audit2\\main.py\" -Pattern \"def _is_borderline\").LineNumber\n(Get-Content \"C:\\Users\\E\\Desktop\\audit2\\main.py\")[$start..($start+20)] -join \"`n\"\n"
+  "script": "\"=== learned_params.json ===\"\nGet-Content \"C:\\Users\\E\\Desktop\\audit2\\learned_params.json\" -ErrorAction SilentlyContinue | Select-Object -First 20\nif (-not $?) { \"No learned_params.json (using defaults)\" }\n\"=== review_store flat_frac ===\"\nSelect-String -Path \"C:\\Users\\E\\Desktop\\audit2\\review_store.py\" -Pattern \"flat_frac\" | Select-Object LineNumber, Line | Select-Object -First 3\n"
 }
