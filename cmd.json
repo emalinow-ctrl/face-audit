@@ -1,6 +1,6 @@
 {
-  "id": "cmd-021",
+  "id": "cmd-022",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "$env:Path = [System.Environment]::GetEnvironmentVariable(\"Path\",\"Machine\") + \";\" + [System.Environment]::GetEnvironmentVariable(\"Path\",\"User\")\ncd \"$env:USERPROFILE\\Desktop\\audit2\"\n\"=== auth login (what does it ask for?) ===\"\necho \"n\" | opencode auth login 2>&1 | Select-Object -First 20\n\"=== config file ===\"\nGet-Content \"$env:USERPROFILE\\.config\\opencode\\opencode.json\" -ErrorAction SilentlyContinue || echo \"no opencode.json\"\n"
+  "script": "$env:Path = [System.Environment]::GetEnvironmentVariable(\"Path\",\"Machine\") + \";\" + [System.Environment]::GetEnvironmentVariable(\"Path\",\"User\")\n$configDir = \"$env:USERPROFILE\\.config\\opencode\"\nNew-Item -ItemType Directory -Force $configDir | Out-Null\n$config = @{ model = \"opencode/space-bunny-free\" } | ConvertTo-Json\n$config | Out-File -FilePath \"$configDir\\opencode.json\" -Encoding utf8\n\"config written: $config\"\n\"=== testing ===\"\ncd \"$env:USERPROFILE\\Desktop\\audit2\"\n\"hello\" | opencode run \"Reply with exactly: SPACEBUNNY_OK\" 2>&1 | Select-Object -First 10\n"
 }
