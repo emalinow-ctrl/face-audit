@@ -1,6 +1,6 @@
 {
-  "id": "cmd-063",
+  "id": "cmd-064",
   "status": "pending",
   "cwd": "C:\\Users\\E\\Desktop\\audit2",
-  "script": "\"=== opencode tab content ===\"\nSelect-String -Path \"C:\\Users\\E\\Desktop\\audit2\\status_server.py\" -Pattern \"showTab\\('opencode'\\)|id=.oc-\" | Select-Object LineNumber, Line | Select-Object -First 5\n"
+  "script": "\"=== tab content divs ===\"\nSelect-String -Path \"C:\\Users\\E\\Desktop\\audit2\\status_server.py\" -Pattern 'id=\"content-' | Select-Object LineNumber, Line | Select-Object -First 5\n"
 }
