@@ -1,4 +1,4 @@
-# face-audit configuration — everything tunable lives here.
+# Veilaudit configuration — everything tunable lives here.
 # Run `python calibrate.py` on a sample clip before trusting these thresholds.
 
 paths:

@@ -37,7 +37,7 @@ seed; harden it into something reliable.
       (eyes visible), inpainting-style censorship, faces at small scale.
 - [ ] Review-loop maturation: from single-reviewer accept/deny to
       label-export → retrain → redeploy cycle documented as a loop.
-- [ ] CLI one-liner output contract: `face-audit check video.mp4` →
+- [ ] CLI one-liner output contract: `Veilaudit check video.mp4` →
       machine-readable verdict (JSON) + human report. This is what partners
       would actually call.
 - Acceptance: benchmark P/R ≥ agreed targets on pixelation and blur classes;
@@ -53,7 +53,7 @@ of a PDF, "redacted" text still selectable, OCR-recoverable scans.
       (author, revision history, embedded original pages).
 - [ ] Image-of-document auditor: detect OCR-recoverable text under boxes or
       marker strokes (heavy degradation still leaks structure).
-- [ ] Same verdict contract as Phase 1: `face-audit check doc.pdf`.
+- [ ] Same verdict contract as Phase 1: `Veilaudit check doc.pdf`.
 - Acceptance: catches every failure class above on a synthetic redaction
   test corpus built from public-domain documents.
 

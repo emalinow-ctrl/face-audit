@@ -1,4 +1,4 @@
-# face-audit
+# Veilaudit
 
 Offline batch pipeline that audits folders of video for **improperly censored (unblurred) faces**.
 Everything runs locally — InsightFace/ONNX face detection, classic CV blur metrics,

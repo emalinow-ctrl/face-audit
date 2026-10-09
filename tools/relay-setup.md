@@ -14,7 +14,7 @@ In PowerShell (regular, not admin):
 # clone's local git config on YOUR machine. Rotate it whenever you like:
 # GitHub -> Settings -> Developer settings -> Personal access tokens.
 $pat = 'PASTE_YOUR_TOKEN_HERE'
-git clone --branch relay "https://x-access-token:${pat}@github.com/emalinow-ctrl/face-audit.git" "$env:USERPROFILE\relay"
+git clone --branch relay "https://x-access-token:${pat}@github.com/emalinow-ctrl/Veilaudit.git" "$env:USERPROFILE\relay"
 ```
 
 ## 2. Start the poller (detached, survives SSH disconnect)
@@ -34,7 +34,7 @@ per-command with the `cwd` field.)
 ```powershell
 $act = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-NoProfile -ExecutionPolicy Bypass -File `"$env:USERPROFILE\Desktop\audit2\tools\relay-poller.ps1`""
 $trg = New-ScheduledTaskTrigger -AtLogOn -User $env:USERNAME
-Register-ScheduledTask -TaskName "FaceAuditRelay" -Action $act -Trigger $trg -Description "face-audit command relay (user-level, revocable)"
+Register-ScheduledTask -TaskName "FaceAuditRelay" -Action $act -Trigger $trg -Description "Veilaudit command relay (user-level, revocable)"
 ```
 
 Remove with: `Unregister-ScheduledTask -TaskName "FaceAuditRelay" -Confirm:$false`

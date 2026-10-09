@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""face-audit: offline batch audit of videos for unblurred faces.
+"""Veilaudit: offline batch audit of videos for unblurred faces.
 
     python main.py --input-dir /data/videos --output-dir /data/audit_out
 
@@ -36,7 +36,7 @@ from tracker import IoUTracker
 from utils import expand_bbox
 
 app = typer.Typer(add_completion=False)
-log = logging.getLogger("face-audit")
+log = logging.getLogger("Veilaudit")
 
 _DETECTOR: FaceDetector | None = None
 

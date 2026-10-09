@@ -16,7 +16,7 @@ small files on each poll; it does no video decoding.
 Bind --host to the machine's Tailscale IP so the dashboard is reachable over
 the tailnet but not the LAN. Windows Firewall may need an inbound rule for
 the port (run once, elevated PowerShell):
-  New-NetFirewallRule -DisplayName "face-audit dashboard" -Direction Inbound `
+  New-NetFirewallRule -DisplayName "Veilaudit dashboard" -Direction Inbound `
     -LocalPort 8472 -Protocol TCP -Action Allow
 """
 from __future__ import annotations
@@ -38,7 +38,7 @@ app = typer.Typer(add_completion=False)
 
 HTML = """<!DOCTYPE html>
 <html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>face-audit</title>
+<title>Veilaudit</title>
 <style>
 body{background:#101014;color:#e8e8e8;font-family:system-ui,sans-serif;margin:0;padding:20px}
 #wrap{max-width:1000px;margin:0 auto}
@@ -98,7 +98,7 @@ h2{margin:0 0 4px} .sub{color:#888;font-size:13px;margin-bottom:18px}
   font-size:28px;cursor:pointer}
 #rev-empty{color:#888;font-size:16px;padding:40px;text-align:center}
 </style></head><body><div id="wrap">
-<div class="row"><h2>face-audit</h2><span id="task" class="meta"></span></div>
+<div class="row"><h2>Veilaudit</h2><span id="task" class="meta"></span></div>
 <div id="tabs">
   <button class="tab active" id="tab-live" onclick="showTab('live')">Live</button>
   <button class="tab" id="tab-flagged" onclick="showTab('flagged')">Flagged Frames<span class="n" id="flag-n">0</span></button>

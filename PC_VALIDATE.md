@@ -1,4 +1,4 @@
-# Validation runbook — run the face-audit test suite on your own PC
+# Validation runbook — run the Veilaudit test suite on your own PC
 
 Your 5800X3D / 32GB is the right machine for this. The VM here choked (2 CPUs,
 7GB RAM); the full loop fits comfortably on your box. Total: ~10 minutes of
@@ -20,13 +20,13 @@ not to validate) and `__pycache__`:
 
 ```bash
 rsync -avz --exclude 'testdata/fairface' --exclude '__pycache__' --exclude '.venv' \
-  <source>:~/workspace/face-audit/ ~/face-audit/
+  <source>:~/workspace/Veilaudit/ ~/Veilaudit/
 ```
 
 ## 2. Set up
 
 ```bash
-cd ~/face-audit
+cd ~/Veilaudit
 python -m venv .venv && .venv/bin/pip install -r requirements.txt
 ```
 

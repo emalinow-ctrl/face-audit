@@ -27,7 +27,7 @@ from review_store import ReviewDB
 app = typer.Typer(add_completion=False)
 
 HTML = """<!DOCTYPE html>
-<html><head><meta charset="utf-8"><title>face-audit review</title>
+<html><head><meta charset="utf-8"><title>Veilaudit review</title>
 <style>
 body{background:#141414;color:#e8e8e8;font-family:system-ui,sans-serif;margin:0;padding:20px}
 #wrap{max-width:1100px;margin:0 auto}
@@ -52,7 +52,7 @@ kbd{background:#333;border:1px solid #555;border-radius:4px;padding:1px 6px;font
 .hidden{display:none}
 </style></head>
 <body><div id="wrap">
-<div id="bar"><h2 style="margin:0">face-audit review queue</h2><div id="prog"></div></div>
+<div id="bar"><h2 style="margin:0">Veilaudit review queue</h2><div id="prog"></div></div>
 <div id="empty" class="hidden"><div id="done">Queue is empty — nothing to review.</div></div>
 <div id="card" class="card hidden">
   <div><img id="crop" src=""><img id="frame" src=""></div>

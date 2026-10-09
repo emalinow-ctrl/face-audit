@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Score face-audit outputs against synthetic ground truth.
+"""Score Veilaudit outputs against synthetic ground truth.
 
 Checks, per video:
   - EVENT RECALL: every scheduled "sharp" (violation) segment got >=1 exported
