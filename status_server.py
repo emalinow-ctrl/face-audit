@@ -102,6 +102,7 @@ h2{margin:0 0 4px} .sub{color:#888;font-size:13px;margin-bottom:18px}
 <div id="tabs">
   <button class="tab active" id="tab-live" onclick="showTab('live')">Live</button>
   <button class="tab" id="tab-flagged" onclick="showTab('flagged')">Flagged Frames<span class="n" id="flag-n">0</span></button>
+  <button class="tab" id="tab-opencode" onclick="showTab('opencode')">OpenCode<span class="n hidden" id="oc-n"></span></button>
 </div>
 
 <div id="page-live">
@@ -138,15 +139,37 @@ h2{margin:0 0 4px} .sub{color:#888;font-size:13px;margin-bottom:18px}
 <div class="meta" style="margin-top:10px">← deny · → accept · swipe or tap</div>
 </div>
 
+<div id="page-opencode" class="hidden">
+  <div class="card">
+    <div class="row"><span class="name">OpenCode Optimization</span><span class="pill" id="oc-status">idle</span></div>
+    <div class="kv">
+      <div><div class="v" id="oc-phase">-</div><div class="k">Phase</div></div>
+      <div><div class="v" id="oc-task">-</div><div class="k">Current Task</div></div>
+      <div><div class="v" id="oc-elapsed">-</div><div class="k">Elapsed</div></div>
+      <div><div class="v" id="oc-updated">-</div><div class="k">Last Update</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="name">Recent Log</div>
+    <pre id="oc-log" style="background:#0a0a0c;padding:12px;border-radius:8px;overflow-x:auto;font-size:12px;max-height:300px;overflow-y:auto">No updates yet. POST to /api/opencode to report progress.</pre>
+  </div>
+  <div class="card">
+    <div class="name">Files Changed</div>
+    <div id="oc-files" class="meta">None yet.</div>
+  </div>
+</div>
 <script>
 let flagged=[], revIdx=-1;
 /* ---------- tabs ---------- */
 function showTab(which){
   document.getElementById('tab-live').classList.toggle('active', which==='live');
   document.getElementById('tab-flagged').classList.toggle('active', which==='flagged');
+  document.getElementById('tab-opencode').classList.toggle('active', which==='opencode');
   document.getElementById('page-live').classList.toggle('hidden', which!=='live');
   document.getElementById('page-flagged').classList.toggle('hidden', which!=='flagged');
+  document.getElementById('page-opencode').classList.toggle('hidden', which!=='opencode');
   if(which==='flagged') loadFlagged();
+  if(which==='opencode') loadOpencode();
 }
 /* ---------- live ---------- */
 async function tick(){
@@ -286,6 +309,28 @@ ri.addEventListener('touchend',e=>{
 },{passive:true});
 function esc(x){return String(x).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
 tick();
+async function loadOpencode(){
+  try{
+    const s = await (await fetch('/api/opencode')).json();
+    const pill = document.getElementById('oc-status');
+    pill.textContent = s.status || 'idle';
+    pill.className = 'pill ' + (s.status==='running' ? 'run' : s.status==='complete' ? 'done' : 'idle');
+    document.getElementById('oc-phase').textContent = s.phase || '-';
+    document.getElementById('oc-task').textContent = s.task || '-';
+    const el = s.elapsed_sec || 0;
+    document.getElementById('oc-elapsed').textContent =
+      Math.floor(el/3600)+'h '+Math.floor(el%3600/60)+'m '+Math.floor(el%60)+'s';
+    document.getElementById('oc-updated').textContent = s.updated_at ? new Date(s.updated_at).toLocaleTimeString() : '-';
+    document.getElementById('oc-log').textContent = (s.log_lines||[]).join('\n') || 'No log lines.';
+    const files = s.files_changed||[];
+    document.getElementById('oc-files').innerHTML = files.length
+      ? files.map(f=>'<div>'+f+'</div>').join('') : 'None yet.';
+    const n = document.getElementById('oc-n');
+    if(s.status==='running'){ n.textContent='●'; n.classList.remove('hidden'); }
+    else n.classList.add('hidden');
+  }catch(e){ /* silent */ }
+}
+setInterval(()=>{ if(!document.getElementById('page-opencode').classList.contains('hidden')) loadOpencode(); }, 5000);
 </script></body></html>
 """
 
@@ -407,6 +452,26 @@ class Ctx:
     ckpt_db: Path
     review_db: Path
     input_dir: Path
+
+
+def _opencode_status(out_dir: Path) -> dict:
+    """Read latest OpenCode progress, or empty state."""
+    f = out_dir / "status" / "opencode.json"
+    try:
+        return json.loads(f.read_text())
+    except (OSError, ValueError):
+        return {"status": "idle", "phase": "", "task": "",
+                "elapsed_sec": 0, "log_lines": [], "files_changed": []}
+
+
+def _save_opencode_status(out_dir: Path, data: dict) -> None:
+    """Persist OpenCode progress update."""
+    d = out_dir / "status"
+    d.mkdir(parents=True, exist_ok=True)
+    allowed = {"status", "phase", "task", "elapsed_sec", "log_lines", "files_changed"}
+    clean = {k: data[k] for k in allowed if k in data}
+    clean["updated_at"] = datetime.now(timezone.utc).isoformat()
+    (d / "opencode.json").write_text(json.dumps(clean, indent=2))
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -556,10 +621,20 @@ class Handler(BaseHTTPRequestHandler):
                 return self._send(200, p.read_bytes(), ctype)
             except OSError:
                 return self._send(404, b"missing file", "text/plain")
+        if path == "/api/opencode":
+            return self._json(_opencode_status(self.ctx.out_dir))
         return self._send(404, b"not found", "text/plain")
 
     def do_POST(self):
-        if urlparse(self.path).path != "/api/verdict":
+        ppath = urlparse(self.path).path
+        if ppath == "/api/opencode":
+            try:
+                body = json.loads(self.rfile.read(int(self.headers.get("Content-Length", 0))))
+                _save_opencode_status(self.ctx.out_dir, body)
+            except (ValueError, KeyError, TypeError):
+                return self._send(400, b"bad request", "text/plain")
+            return self._json({"ok": True})
+        if ppath != "/api/verdict":
             return self._send(404, b"not found", "text/plain")
         try:
             body = json.loads(self.rfile.read(int(self.headers.get("Content-Length", 0))))
